@@ -18,7 +18,16 @@ function App() {
     secondTimeStamp: ''
   })
 
+  const [reply, setReplyState] = useState({
+    request: '',
+    name: '',
+    firstTimeStamp: '',
+    secondTimeStamp: ''
+  })
 
+  function handleFoundMarker(reply){
+    setReplyState(reply);
+  }
 
   function handleCommandChange(message){
     setCommandState(command => message)
@@ -46,10 +55,10 @@ function App() {
           <LoopList commandInformation={ command }></LoopList>
         </Col>
         <Col>
-          <MarkerList commandInformation={ command }></MarkerList>
+          <MarkerList commandInformation={ command  } onFoundMarker={handleFoundMarker}></MarkerList>
         </Col>
       </Row>   
-      <Player onCommandChange={handleCommandChange}/>
+      <Player onCommandChange={handleCommandChange} reply={reply}/>
      
       
 
