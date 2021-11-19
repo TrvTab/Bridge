@@ -7,19 +7,13 @@ import {Button, Container, Stack, Row, Col, CloseButton, Text, Form} from 'react
 function LoopList(props){
     const [loopItems, setLoopItems] = useState([])
     const [showForm, setShowForm] = useState(false)
-    const [commandReceived, setCommandReceived] = useState(props.commandInformation)
 
-    useEffect(() => {   
-      return () => {
-      }
-    }, [commandReceived])
-
+   
 
     const handleRemove = (key) => {
-        console.log("TEEEEST")
+        console.log("TEEEEST", key)
         setLoopItems(loopItems => loopItems.filter((item) => item.key !== key))
     }
-
     
     const submitLoop = (title, colour, startTime, endTime) => {
         setShowForm(false)
@@ -32,12 +26,27 @@ function LoopList(props){
         </li>])
     }
 
+    useEffect(() => {
+      if (props.commandInformation.request.includes("marker")){
+        return;
+      } 
+      else if (props.commandInformation.request === "addLoop"){
+       submitLoop(props.commandInformation.name, "colour", props.commandInformation.firstTimeStamp, props.commandInformation.secondTimeStamp)
+      }
+       else if (props.commandInformation.request === "delLoop"){
+        handleRemove(props.commandInformation.name)
+      }
+      return () => {
+      }
+    }, [props.commandInformation])
+
+
     const addLoop = () => {
         setShowForm(true)
     }
-    
 
     return (
+      
       <Container>
         {!showForm && (
           <ul>

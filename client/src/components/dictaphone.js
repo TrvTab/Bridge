@@ -16,32 +16,22 @@ function Dictaphone(props) {
 
     //Add marker and loop with name
     {
-      command: 'add marker called :name at :timestamp',
-      callback: (name, timestamp) => setMessage({request: 'addMarker', name: name, firstTimeStamp: timestamp})
+      command: 'add marker called :name at :min minutes and :sec seconds',
+      callback: (name, min, sec) => setMessage({request: 'addMarker', name: name, firstTimeStamp: (min + ":" + (sec.length===1 ? "0" + sec : sec))})
     },
     {
-      command: 'Add loop called :name from :firstTimeStamp to :secondTimeStamp ',
-      callback: (name, firstTimeStamp, secondTimeStamp) => 
-          setMessage({request: 'addLoop', name: name, firstTimeStamp: firstTimeStamp, secondTimeStamp: secondTimeStamp})
-    },
-    //Add marker and loop without name
-    {
-      command: 'add marker at :timestamp',
-      callback: (timestamp) => setMessage({request: 'addMarker', firstTimeStamp: timestamp})
-    },
-    {
-      command: 'Add loop from :firstTimeStamp to :secondTimeStamp ',
-      callback: (firstTimeStamp, secondTimeStamp) => 
-          setMessage({request: 'addLoop', firstTimeStamp: firstTimeStamp, secondTimeStamp: secondTimeStamp})
+      command: 'Add loop called :name at :firstMin minutes and :firstSec seconds and :secondMin minutes and :secondSec seconds',
+      callback: (name, firstMin, firstSec, secondMin, secondSec) => 
+          setMessage({request: 'addLoop', name: name, firstTimeStamp: (firstMin + ":" + (firstSec.length===1 ? "0" + firstSec : firstSec)), secondTimeStamp: (secondMin + ":" + (secondSec.length===1 ? "0" + secondSec : secondSec))})
     },
     //Delete marker and loop 
     {
-      command: 'Delete marker called :name ',
+      command: 'Delete marker called :name',
       callback: (name) => 
           setMessage({request: 'delMarker', name: name})
     },
     {
-      command: 'Delete loop called :name ',
+      command: 'Delete loop called :name',
       callback: (name) => 
           setMessage({request: 'delLoop', name: name})
     },
