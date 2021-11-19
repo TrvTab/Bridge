@@ -1,7 +1,6 @@
 //import React from 'react';
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
 import { useState, useEffect } from 'react'
-import Markers from './markers/markers';
 
 
 function Dictaphone(props) {

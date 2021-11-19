@@ -1,9 +1,10 @@
 import logo from './logo.svg';
 import './App.css';
-import Markers from './components/markers/markers'
 import Dictaphone from './components/dictaphone';
-import ReactPlayer from 'react-player/lazy'
 import Player from './components/players/player';
+import LoopList from './components/LoopList.js'
+import {Row, Col} from 'react-bootstrap'
+import 'bootstrap/dist/css/bootstrap.min.css'
 
 function App() {
   return (
@@ -21,12 +22,18 @@ function App() {
         >
           Learn React
         </a>
-      </header>
-      <Markers />
-      
+      </header>      
       <Player/>
      
-      <input type="range" min="0" max="0.999999" step="any"></input>
+      <Row>
+        <Col>
+          <LoopList></LoopList>
+        </Col>
+        <Col>
+          <LoopList></LoopList>
+        </Col>
+      </Row>
+
     </div>
   );
 }
