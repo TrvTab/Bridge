@@ -20,7 +20,7 @@ function App() {
 
   function handleCommandChange(message){
     console.log(command)
-    setCommandState({message})
+    setCommandState(message)
     console.log("HANDLECOMMANDHCNAGE " +  message.request + " " + message.name + " " + message.firstTimeStamp)
     console.log(command.request)
 
