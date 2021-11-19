@@ -4,10 +4,11 @@ import Dictaphone from './components/dictaphone';
 import Player from './components/players/player';
 import LoopList from './components/LoopList.js'
 import MarkerList from './components/MarkerList.js'
-import {Row, Col} from 'react-bootstrap'
+import {Row, Col, Modal, Button} from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import {useState} from 'react'
 import Popup from './components/popup';
+import InfoModal from './components/InfoModal.js'
 
 function App() {
   
@@ -25,6 +26,10 @@ function App() {
     secondTimeStamp: ''
   })
 
+  const [infoModalShow, setInfoModalShow] = useState(false);
+  const handleInfoModalClose = () => setInfoModalShow(false);
+  const handleInfoModalShow = () => setInfoModalShow(true);
+
   function handleFoundTimeElement(reply){
     setReplyState(reply);
   }
@@ -33,7 +38,6 @@ function App() {
     setCommandState(command => message)
   }
   return (
-
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
@@ -48,20 +52,29 @@ function App() {
         >
           Learn React
         </a>
-      </header>   
-      <Popup/>
+      </header>
+      <Button variant="primary" onClick={() => setInfoModalShow(true)}>
+        Info
+      </Button>
+      <InfoModal
+        show={infoModalShow}
+        onHide={() => setInfoModalShow(false)}
+      />
       <Row>
         <Col>
-          <LoopList commandInformation={ command } onFoundTimeElement={handleFoundTimeElement}></LoopList>
+          <LoopList
+            commandInformation={command}
+            onFoundTimeElement={handleFoundTimeElement}
+          ></LoopList>
         </Col>
         <Col>
-          <MarkerList commandInformation={ command  } onFoundTimeElement={handleFoundTimeElement}></MarkerList>
+          <MarkerList
+            commandInformation={command}
+            onFoundTimeElement={handleFoundTimeElement}
+          ></MarkerList>
         </Col>
-      </Row>   
-      <Player onCommandChange={handleCommandChange} reply={reply}/>
-     
-      
-
+      </Row>
+      <Player onCommandChange={handleCommandChange} reply={reply} />
     </div>
   );
 }
