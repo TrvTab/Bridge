@@ -3,6 +3,7 @@ import './App.css';
 import Dictaphone from './components/dictaphone';
 import Player from './components/players/player';
 import LoopList from './components/LoopList.js'
+import MarkerList from './components/MarkerList.js'
 import {Row, Col} from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
@@ -30,7 +31,7 @@ function App() {
           <LoopList></LoopList>
         </Col>
         <Col>
-          <LoopList></LoopList>
+          <MarkerList></MarkerList>
         </Col>
       </Row>
 

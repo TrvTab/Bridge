@@ -1,31 +1,30 @@
 import { useState, useEffect} from 'react'
-import Loop from './Loop'
-import LoopForm from './LoopForm'
+import Marker from './Marker'
+import MarkerForm from './MarkerForm'
 import {Button, Container, Stack, Row, Col, CloseButton, Text, Form} from 'react-bootstrap';
 
 
-function LoopList(){
-    const [loopItems, setLoopItems] = useState([])
+function MarkerList(){
+    const [markerItems, setMarkerItems] = useState([])
     const [showForm, setShowForm] = useState(false)
 
 
     const handleRemove = (key) => {
-        console.log("TEEEEST")
-        setLoopItems(loopItems => loopItems.filter((item) => item.key !== key))
+        setMarkerItems(markerItems => markerItems.filter((item) => item.key !== key))
     }
 
-    const submitLoop = (title, colour, startTime, endTime) => {
+    const submitMarker = (title, colour, time) => {
         setShowForm(false)
-        setLoopItems(loopItems => [...loopItems,
+        setMarkerItems(markerItems => [...markerItems,
         <li list-style="none" key={title}>
             <Row>
-                <Loop title={title} colour={colour} startTime={startTime} endTime={endTime}></Loop>
+                <Marker title={title} colour={colour} time={time}></Marker>
                 <CloseButton onClick={() => handleRemove(title)}></CloseButton>
             </Row>
         </li>])
     }
 
-    const addLoop = () => {
+    const addMarker = () => {
         setShowForm(true)
     }
     
@@ -34,17 +33,17 @@ function LoopList(){
       <Container>
         {!showForm && (
           <ul>
-            {loopItems}
-            <Button onClick={addLoop}></Button>
+            {markerItems}
+            <Button onClick={addMarker}></Button>
           </ul>
         )}
         {showForm && (
             <div>
-                <LoopForm submitLoop={submitLoop}></LoopForm>
+                <MarkerForm submitMarker={submitMarker}></MarkerForm>
             </div>
         )}
 
       </Container>
     );
 }
-export default LoopList;
+export default MarkerList;
