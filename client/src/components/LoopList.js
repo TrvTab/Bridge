@@ -8,9 +8,12 @@ function LoopList(){
     const [listItems, setListItems] = useState([])
     const [showForm, setShowForm] = useState(false)
 
+    const deleteLoop = () => {
+        setListItems(listItems.filter((item) => item.key === ""))
+    }
+    
     const submitLoop = (title, colour, startTime, endTime) => {
-        //setShowForm(false)
-        console.log(title)
+        setShowForm(false)
         setListItems(listItems => [...listItems,<Loop key={title} title={title} colour={colour} startTime={startTime} endTime={endTime}></Loop>])
     }
 
@@ -18,6 +21,7 @@ function LoopList(){
         setShowForm(true)
     }
     
+
     return (
       <Container>
         {!showForm && (

@@ -16,7 +16,7 @@ function Loop(props){
                     <span>{colour}</span>
                     <Col>
                     <span>{title}</span>
-                    <span>{startTime} {endTime}</span>
+                    <span> {startTime} {endTime}</span>
                     </Col>
 
                     <CloseButton/>

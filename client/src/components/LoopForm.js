@@ -3,7 +3,7 @@ import Loop from './Loop'
 import {Button, Container, Stack, Row, Col, CloseButton, Text, Form} from 'react-bootstrap';
 
 
-function LoopForm({addLoop}){
+function LoopForm({submitLoop}){
 
   const [title, setTitle] = useState();
   const [colour, setColour] = useState();
@@ -11,8 +11,7 @@ function LoopForm({addLoop}){
   const [endTime, setEndTime] = useState();
 
   const handleSubmit= (e) => {
-    console.log("hi")
-    addLoop(title, colour, startTime, endTime)
+    submitLoop(title, colour, startTime, endTime)
     e.preventDefault();
 
   }
