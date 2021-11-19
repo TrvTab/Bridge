@@ -26,6 +26,13 @@ function LoopList(props){
         </li>])
     }
 
+    const handleGoToLoop = (key,request) => {
+      let sampleItem = loopItems.find(item => item.key === key)
+      console.log(sampleItem)
+      let foundItem = loopItems.find(item => item.key === key).props.children.props.children[0].props
+      let foundItemCopy =  Object.assign({request: request}, foundItem)
+      props.onFoundTimeElement(foundItemCopy);
+    }
     useEffect(() => {
       if (props.commandInformation.request.includes("marker")){
         return;
@@ -35,6 +42,10 @@ function LoopList(props){
       }
        else if (props.commandInformation.request === "delLoop"){
         handleRemove(props.commandInformation.name)
+      }
+      else if (props.commandInformation.request === "goToLoop") {
+        handleGoToLoop(props.commandInformation.name, props.commandInformation.request)
+
       }
       return () => {
       }

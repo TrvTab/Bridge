@@ -25,8 +25,7 @@ function App() {
     secondTimeStamp: ''
   })
 
-  function handleFoundMarker(reply){
-    console.log("App js", reply)
+  function handleFoundTimeElement(reply){
     setReplyState(reply);
   }
 
@@ -53,10 +52,10 @@ function App() {
       <Popup/>
       <Row>
         <Col>
-          <LoopList commandInformation={ command }></LoopList>
+          <LoopList commandInformation={ command } onFoundTimeElement={handleFoundTimeElement}></LoopList>
         </Col>
         <Col>
-          <MarkerList commandInformation={ command  } onFoundMarker={handleFoundMarker}></MarkerList>
+          <MarkerList commandInformation={ command  } onFoundTimeElement={handleFoundTimeElement}></MarkerList>
         </Col>
       </Row>   
       <Player onCommandChange={handleCommandChange} reply={reply}/>

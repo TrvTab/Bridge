@@ -57,6 +57,10 @@ function Dictaphone(props) {
     {
       command: 'go to loop :name',
       callback:(name) => setMessage({request: 'goToLoop', name: name.toLowerCase()})
+    },
+    {
+      command: 'exit loop',
+      callback: () => setMessage({request: "exitLoop"})
     }
 
   ]

@@ -25,8 +25,10 @@ function MarkerList(props){
         </li>])
     }
 
-    const handleGoToMarker = (key) => {
-        props.onFoundMarker((markerItems.find(item => item.key === key)).props.children.props.children[0].props);
+    const handleGoToMarker = (key,request) => {
+      let foundItem = markerItems.find(item => item.key === key).props.children.props.children[0].props
+      let foundItemCopy =  Object.assign({request: request}, foundItem)
+      props.onFoundTimeElement(foundItemCopy);
     }
 
     useEffect(() => {
@@ -34,9 +36,8 @@ function MarkerList(props){
       else if (props.commandInformation.request === "addMarker"){
        submitMarker(props.commandInformation.name, "colour", props.commandInformation.firstTimeStamp);
       } else if (props.commandInformation.request === "goToMarker"){
-          handleGoToMarker(props.commandInformation.name);       
-      }
-
+          handleGoToMarker(props.commandInformation.name, props.commandInformation.request);       
+      } 
     }, [props.commandInformation])
 
     const addMarker = () => {

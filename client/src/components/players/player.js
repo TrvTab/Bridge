@@ -35,7 +35,8 @@ class Player extends Component {
     duration: 0,
     playbackRate: 1.0,
     loop: false,
-    dictaphoneData: []
+    dictaphoneData: [],
+    inLoop: false
   }
 
   vocalSkipForward(time){
@@ -53,6 +54,10 @@ class Player extends Component {
     this.player.seekTo(0, "seconds")
   }
 
+  vocalExitLoop() {
+    this.setState({inLoop: false})
+  }
+
   // add if statements for 
   handleDictaphoneData = (childData) => {
     this.setState(() => {
@@ -63,6 +68,7 @@ class Player extends Component {
     if (childData.request === "skipFwd") this.vocalSkipForward(15);
     else if (childData.request === "skipBwd") this.vocalSkipBackwards(15);
     else if (childData.request === "restart") this.vocalRestart();
+    else if (childData.request === "exitLoop") this.vocalExitLoop();
     else if (childData.request === "addMarker") this.vocalPassInfoToApp(childData);
     else if (childData.request === "addLoop") this.vocalPassInfoToApp(childData)
     else if (childData.request === 'delMarker') this.vocalPassInfoToApp(childData)
@@ -72,6 +78,7 @@ class Player extends Component {
     else if (childData.request === "goToLoop") this.vocalPassInfoToApp(childData)
     
   }
+  
 
   load = url => {
     this.setState({
@@ -211,12 +218,27 @@ class Player extends Component {
 
   componentDidUpdate(prevProps) {
     if (prevProps.reply !== this.props.reply) {
-      this.player.seekTo(this.convertToSeconds(this.props.reply.time), "seconds")
+      if (this.props.reply.request === "goToMarker"){
+        this.player.seekTo(this.convertToSeconds(this.props.reply.time), "seconds")
+      }
+      else if (this.props.reply.request === "goToLoop") {
+        this.setState({inLoop: true})
+        console.log(this.state.inLoop)
+        this.player.seekTo(this.convertToSeconds(this.props.reply.startTime), "seconds")
+        
+        while (this.state.inLoop) {
+          console.log("inloop")
+          if (this.player.getCurrentTime() >= this.convertToSeconds(this.props.reply.endTime)){
+            this.player.seekTo(this.convertToSeconds(this.props.reply.startTime), "seconds")
+          }
+        }
+      }
     }
+
   }
 
   render () {
-    const { url, playing, controls, light, volume, muted, loop, played, loaded, duration, playbackRate, pip, dictaphoneData } = this.state
+    const { url, playing, controls, light, volume, muted, loop, played, loaded, duration, playbackRate, pip, dictaphoneData, inLoop } = this.state
     const SEPARATOR = ' · '
 
     return (
