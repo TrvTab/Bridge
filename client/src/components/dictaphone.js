@@ -17,23 +17,23 @@ function Dictaphone(props) {
     //Add marker and loop with name
     {
       command: 'add marker called :name at :min minutes and :sec seconds',
-      callback: (name, min, sec) => setMessage({request: 'addMarker', name: name, firstTimeStamp: (min + ":" + (sec.length===1 ? "0" + sec : sec))})
+      callback: (name, min, sec) => setMessage({request: 'addMarker', name: name.toLowerCase(), firstTimeStamp: (min + ":" + (sec.length===1 ? "0" + sec : sec))})
     },
     {
-      command: 'Add loop called :name at :firstMin minutes and :firstSec seconds and :secondMin minutes and :secondSec seconds',
+      command: 'Add loop called :name from :firstMin minutes and :firstSec seconds until :secondMin minutes and :secondSec seconds',
       callback: (name, firstMin, firstSec, secondMin, secondSec) => 
-          setMessage({request: 'addLoop', name: name, firstTimeStamp: (firstMin + ":" + (firstSec.length===1 ? "0" + firstSec : firstSec)), secondTimeStamp: (secondMin + ":" + (secondSec.length===1 ? "0" + secondSec : secondSec))})
+          setMessage({request: 'addLoop', name: name.toLowerCase(), firstTimeStamp: (firstMin + ":" + (firstSec.length===1 ? "0" + firstSec : firstSec)), secondTimeStamp: (secondMin + ":" + (secondSec.length===1 ? "0" + secondSec : secondSec))})
     },
     //Delete marker and loop 
     {
       command: 'Delete marker called :name',
       callback: (name) => 
-          setMessage({request: 'delMarker', name: name})
+          setMessage({request: 'delMarker', name: name.toLowerCase()})
     },
     {
       command: 'Delete loop called :name',
       callback: (name) => 
-          setMessage({request: 'delLoop', name: name})
+          setMessage({request: 'delLoop', name: name.toLowerCase()})
     },
     {
       command: 'skip ahead',
@@ -52,11 +52,11 @@ function Dictaphone(props) {
     },
     {
       command: 'go to marker :name',
-      callback:(name) => setMessage({request: 'goToMarker', name: name})
+      callback:(name) => setMessage({request: 'goToMarker', name: name.toLowerCase()})
     },
     {
       command: 'go to loop :name',
-      callback:(name) => setMessage({request: 'goToLoop', name: name})
+      callback:(name) => setMessage({request: 'goToLoop', name: name.toLowerCase()})
     }
 
   ]

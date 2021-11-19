@@ -26,7 +26,7 @@ function MarkerList(props){
     }
 
     const handleGoToMarker = (key) => {
-        props.onFoundMarker(markerItems.find(item => item.key === key));
+        props.onFoundMarker((markerItems.find(item => item.key === key)).props.children.props.children[0].props);
     }
 
     useEffect(() => {

@@ -26,6 +26,7 @@ function App() {
   })
 
   function handleFoundMarker(reply){
+    console.log("App js", reply)
     setReplyState(reply);
   }
 

@@ -5,8 +5,10 @@ import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-import Dropdown from 'react-bootstrap/Dropdown'
-import DropdownButton from 'react-bootstrap/DropdownButton'
+
+import { updateAndNotify } from 'react'
+
+
 // import { hot } from 'react-hot-loader'
 //full from 'screenfull'
 
@@ -68,14 +70,6 @@ class Player extends Component {
     else if (childData.request === "restart") this.vocalPassInfoToApp(childData);
     else if (childData.request === "goToMarker") this.vocalPassInfoToApp(childData)
     else if (childData.request === "goToLoop") this.vocalPassInfoToApp(childData)
-   
-   
-
-    
-      
-
-    
-
     
   }
 
@@ -201,8 +195,24 @@ class Player extends Component {
     )
   }
 
+  convertToSeconds(time) {
+    let arr = time.split(":")
+    var [minutes, seconds] = arr;
+    var totalSeconds = parseInt(minutes) * 60
+    totalSeconds += parseInt(seconds)
+    return totalSeconds
+  }
+
+  
+
   ref = player => {
     this.player = player
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.reply !== this.props.reply) {
+      this.player.seekTo(this.convertToSeconds(this.props.reply.time), "seconds")
+    }
   }
 
   render () {
