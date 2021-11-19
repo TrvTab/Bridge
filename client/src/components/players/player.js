@@ -43,6 +43,10 @@ class Player extends Component {
     this.player.seekTo(this.player.getCurrentTime() - time, "seconds")
   }
 
+  vocalPassInfoToApp(commandData) {
+    this.props.onCommandChange(commandData)
+  }
+
   // add if statements for 
   handleDictaphoneData = (childData) => {
     this.setState(() => {
@@ -51,6 +55,10 @@ class Player extends Component {
       }
     })
     if (childData.request === "skipFwd") this.vocalSkipForward(15);
+    else if (childData.request === "addMarker") {
+      this.vocalPassInfoToApp(childData)
+
+    }
 
     
   }

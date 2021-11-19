@@ -4,13 +4,20 @@ import LoopForm from './LoopForm'
 import {Button, Container, Stack, Row, Col, CloseButton, Text, Form} from 'react-bootstrap';
 
 
-function LoopList(){
+function LoopList(props){
     const [listItems, setListItems] = useState([])
     const [showForm, setShowForm] = useState(false)
+    const [commandReceived, setCommandReceived] = useState(props.commandInformation)
+
+    useEffect(() => {   
+      return () => {
+      }
+    }, [commandReceived])
 
     const deleteLoop = () => {
         setListItems(listItems.filter((item) => item.key === ""))
     }
+
     
     const submitLoop = (title, colour, startTime, endTime) => {
         setShowForm(false)
@@ -35,6 +42,7 @@ function LoopList(){
                 <LoopForm submitLoop={submitLoop}></LoopForm>
             </div>
         )}
+        
 
       </Container>
     );
