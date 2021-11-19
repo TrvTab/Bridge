@@ -49,6 +49,14 @@ function Dictaphone(props) {
       command: 'restart',
       callback: () =>
           setMessage({request: 'restart'})
+    },
+    {
+      command: 'go to marker :name',
+      callback:(name) => setMessage({request: 'goToMarker', name: name})
+    },
+    {
+      command: 'go to loop :name',
+      callback:(name) => setMessage({request: 'goToLoop', name: name})
     }
 
   ]

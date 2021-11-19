@@ -60,11 +60,14 @@ class Player extends Component {
     })
     if (childData.request === "skipFwd") this.vocalSkipForward(15);
     else if (childData.request === "skipBwd") this.vocalSkipBackwards(15);
+    else if (childData.request === "restart") this.vocalRestart();
     else if (childData.request === "addMarker") this.vocalPassInfoToApp(childData);
     else if (childData.request === "addLoop") this.vocalPassInfoToApp(childData)
     else if (childData.request === 'delMarker') this.vocalPassInfoToApp(childData)
     else if (childData.request === "delLoop") this.vocalPassInfoToApp(childData);
     else if (childData.request === "restart") this.vocalPassInfoToApp(childData);
+    else if (childData.request === "goToMarker") this.vocalPassInfoToApp(childData)
+    else if (childData.request === "goToLoop") this.vocalPassInfoToApp(childData)
    
    
 

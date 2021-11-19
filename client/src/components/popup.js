@@ -18,19 +18,19 @@ function Popup(){
     }
     const popUpStyle = {
         backgroundColor: "grey",
-        //position: "absolute"
+        position: "absolute"
     }
     return (
     <div>
         <button type='button' onClick={handleVisibility}>Info</button>
         {isOpen &&
-        <span> HELLO</span>
-        // (<div style={popUpWrapperStyle}>
-        //     <div style={popUpStyle}>
-        //         <span onClick={handleVisibility}> hello</span>
-        //         <p> HelloHelloHelloHelloHelloHelloHelloHello </p>
-        //     </div>
-        // </div>)
+
+        (<div style={popUpWrapperStyle}>
+            <div style={popUpStyle}>
+                <span onClick={handleVisibility}> hello</span>
+                <p> HelloHelloHelloHelloHelloHelloHelloHello </p>
+            </div>
+        </div>)
             
         }
     </div>
