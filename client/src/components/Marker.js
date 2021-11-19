@@ -3,11 +3,10 @@ import {Button, Container, Stack, Row, Col, CloseButton} from 'react-bootstrap';
 import Circle from 'react-color'
 import { CirclePicker } from 'react-color'
 
-function Loop(props){
+function Marker(props){
     const [title, setTitle] = useState(props.title);
     const [colour, setColour] = useState(props.colour);
-    const [startTime, setStartTime] = useState(props.startTime);
-    const [endTime, setEndTime] = useState(props.endTime);
+    const [time, setTime] = useState(props.time);
 
     return (
 
@@ -16,7 +15,7 @@ function Loop(props){
                     <span>{colour}</span>
                     <Col>
                     <span>{title}</span>
-                    <span> {startTime} {endTime}</span>
+                    <span> {time}</span>
                     </Col>
 
                 </Row>
@@ -24,4 +23,4 @@ function Loop(props){
         </Container>
     );
 }
-export default Loop;
+export default Marker;

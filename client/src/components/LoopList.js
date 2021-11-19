@@ -5,7 +5,7 @@ import {Button, Container, Stack, Row, Col, CloseButton, Text, Form} from 'react
 
 
 function LoopList(props){
-    const [listItems, setListItems] = useState([])
+    const [loopItems, setLoopItems] = useState([])
     const [showForm, setShowForm] = useState(false)
     const [commandReceived, setCommandReceived] = useState(props.commandInformation)
 
@@ -14,14 +14,22 @@ function LoopList(props){
       }
     }, [commandReceived])
 
-    const deleteLoop = () => {
-        setListItems(listItems.filter((item) => item.key === ""))
+
+    const handleRemove = (key) => {
+        console.log("TEEEEST")
+        setLoopItems(loopItems => loopItems.filter((item) => item.key !== key))
     }
 
     
     const submitLoop = (title, colour, startTime, endTime) => {
         setShowForm(false)
-        setListItems(listItems => [...listItems,<Loop key={title} title={title} colour={colour} startTime={startTime} endTime={endTime}></Loop>])
+        setLoopItems(loopItems => [...loopItems,
+        <li list-style="none" key={title}>
+            <Row>
+                <Loop title={title} colour={colour} startTime={startTime} endTime={endTime}></Loop>
+                <CloseButton onClick={() => handleRemove(title)}></CloseButton>
+            </Row>
+        </li>])
     }
 
     const addLoop = () => {
@@ -33,7 +41,7 @@ function LoopList(props){
       <Container>
         {!showForm && (
           <ul>
-            {listItems}
+            {loopItems}
             <Button onClick={addLoop}></Button>
           </ul>
         )}
