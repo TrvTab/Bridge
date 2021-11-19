@@ -33,6 +33,8 @@ function MarkerList(props){
       if (props.commandInformation.request.includes("loop")) return;
       else if (props.commandInformation.request === "addMarker"){
        submitMarker(props.commandInformation.name, "colour", props.commandInformation.firstTimeStamp);
+      } else if (props.commandInformation.request === "delMarker"){
+        handleRemove(props.commandInformation.name)
       } else if (props.commandInformation.request === "goToMarker"){
           handleGoToMarker(props.commandInformation.name);       
       }
