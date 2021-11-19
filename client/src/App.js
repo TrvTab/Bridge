@@ -1,6 +1,9 @@
 import logo from './logo.svg';
 import './App.css';
 import Markers from './components/markers/markers'
+import Dictaphone from './components/dictaphone';
+import ReactPlayer from 'react-player/lazy'
+import Player from './components/players/player';
 
 function App() {
   return (
@@ -19,7 +22,11 @@ function App() {
           Learn React
         </a>
       </header>
-      <Markers/>
+      <Markers />
+      
+      <Player/>
+     
+      <input type="range" min="0" max="0.999999" step="any"></input>
     </div>
   );
 }
