@@ -47,6 +47,10 @@ class Player extends Component {
     this.props.onCommandChange(commandData)
   }
 
+  vocalRestart(){
+    this.player.seekTo(0, "seconds")
+  }
+
   // add if statements for 
   handleDictaphoneData = (childData) => {
     this.setState(() => {
@@ -55,10 +59,19 @@ class Player extends Component {
       }
     })
     if (childData.request === "skipFwd") this.vocalSkipForward(15);
-    else if (childData.request === "addMarker") {
-      this.vocalPassInfoToApp(childData)
+    else if (childData.request === "skipBwd") this.vocalSkipBackwards(15);
+    else if (childData.request === "addMarker") this.vocalPassInfoToApp(childData);
+    else if (childData.request === "addLoop") this.vocalPassInfoToApp(childData)
+    else if (childData.request === 'delMarker') this.vocalPassInfoToApp(childData)
+    else if (childData.request === "delLoop") this.vocalPassInfoToApp(childData);
+    else if (childData.request === "restart") this.vocalPassInfoToApp(childData);
+   
+   
 
-    }
+    
+      
+
+    
 
     
   }

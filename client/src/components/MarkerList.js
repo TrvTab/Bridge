@@ -4,9 +4,10 @@ import MarkerForm from './MarkerForm'
 import {Button, Container, Stack, Row, Col, CloseButton, Text, Form} from 'react-bootstrap';
 
 
-function MarkerList(){
+function MarkerList(props){
     const [markerItems, setMarkerItems] = useState([])
     const [showForm, setShowForm] = useState(false)
+
 
 
     const handleRemove = (key) => {
@@ -23,6 +24,17 @@ function MarkerList(){
             </Row>
         </li>])
     }
+
+    useEffect(() => {
+      if (props.commandInformation.request.includes("loop")) return;
+      else if (props.commandInformation.request === "addMarker")
+       submitMarker(props.commandInformation.name, "colour", props.commandInformation.firstTimeStamp)
+
+
+      return () => {
+        
+      }
+    }, [props.commandInformation])
 
     const addMarker = () => {
         setShowForm(true)
