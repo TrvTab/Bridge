@@ -8,13 +8,21 @@ function LoopList(){
     const [listItems, setListItems] = useState([])
     const [showForm, setShowForm] = useState(false)
 
-    const deleteLoop = () => {
-        setListItems(listItems.filter((item) => item.key === ""))
+
+    const handleRemove = (key) => {
+        console.log("TEEEEST")
+        setListItems(listItems => listItems.filter((item) => item.key !== key))
     }
-    
+
     const submitLoop = (title, colour, startTime, endTime) => {
         setShowForm(false)
-        setListItems(listItems => [...listItems,<Loop key={title} title={title} colour={colour} startTime={startTime} endTime={endTime}></Loop>])
+        setListItems(listItems => [...listItems,
+        <li list-style="none" key={title}>
+            <Row>
+                <Loop title={title} colour={colour} startTime={startTime} endTime={endTime}></Loop>
+                <CloseButton onClick={() => handleRemove(title)}></CloseButton>
+            </Row>
+        </li>])
     }
 
     const addLoop = () => {

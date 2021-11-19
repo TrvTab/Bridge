@@ -19,8 +19,6 @@ function Loop(props){
                     <span> {startTime} {endTime}</span>
                     </Col>
 
-                    <CloseButton/>
-
                 </Row>
 
         </Container>
