@@ -307,13 +307,9 @@ class Player extends Component {
               </select>
               <input type='range' min={0} max={1} step='any' value={volume} onChange={this.handleVolumeChange} />
 
-
               </Col>
             </Row>
           </Container>
-
-        
-
           <table>
             <tbody>
               <tr>
@@ -432,50 +428,7 @@ class Player extends Component {
 
           <Dictaphone sendToPlayer={this.handleDictaphoneData}/>
 
-          <h2>State</h2>
-
-          <table>
-            <tbody>
-              <tr>
-                <th>url</th>
-                <td className={!url ? 'faded' : ''}>
-                  {(url instanceof Array ? 'Multiple' : url) || 'null'}
-                </td>
-              </tr>
-              <tr>
-                <th>playing</th>
-                <td>{playing ? 'true' : 'false'}</td>
-              </tr>
-              <tr>
-                <th>volume</th>
-                <td>{volume.toFixed(3)}</td>
-              </tr>
-              <tr>
-                <th>speed</th>
-                <td>{playbackRate}</td>
-              </tr>
-              <tr>
-                <th>played</th>
-                <td>{played.toFixed(3)}</td>
-              </tr>
-              <tr>
-                <th>loaded</th>
-                <td>{loaded.toFixed(3)}</td>
-              </tr>
-              <tr>
-                <th>duration</th>
-                <td><Duration seconds={duration} /></td>
-              </tr>
-              <tr>
-                <th>elapsed</th>
-                <td><Duration seconds={duration * played} /></td>
-              </tr>
-              <tr>
-                <th>remaining</th>
-                <td><Duration seconds={duration * (1 - played)} /></td>
-              </tr>
-            </tbody>
-          </table>
+          
         </section>
         <footer className='footer'>
          
