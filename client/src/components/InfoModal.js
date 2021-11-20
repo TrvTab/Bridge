@@ -18,9 +18,10 @@ function InfoModal(props) {
           <h4>Commands that should be done using voice (voice commands must be issued exactly like the following to work)</h4>
           <h6> Note that the words with colons in front of them represent values that you will choose </h6> 
           <p>
-            Add marker at a specific time = 'add marker called :name at :min minutes and :sec seconds'<br>
-            Add a loop that from one time stamp to another: 'Add loop called :name from :firstMin minutes and :firstSec seconds until :secondMin minutes and :secondSec seconds'<br>
-            Delete a marker by its name : 'Delete marker called :name'<br></br>
+            Add marker at a specific time = 'add marker called :name at :min minutes and :sec seconds'<br/>
+            Add a loop that from one time stamp to another: 'Add loop called :name from :firstMin minutes and :firstSec seconds until :secondMin minutes and :secondSec seconds'<br/>
+            Delete a marker by its name : 'Delete marker called :name'<br/>
+            Delete a loop by its name : 'Delete loop called :name' <br/>
 
 
             
