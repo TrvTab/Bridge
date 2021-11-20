@@ -3,7 +3,7 @@ import Marker from './Marker'
 import {Button, Container, Stack, Row, Col, CloseButton, Text, Form} from 'react-bootstrap';
 
 
-function MarkerForm({submitMarker}){
+function MarkerForm({submitMarker, onCancelMarker}){
 
   const [title, setTitle] = useState();
   const [colour, setColour] = useState();
@@ -14,6 +14,11 @@ function MarkerForm({submitMarker}){
     e.preventDefault();
 
   }
+
+    const handleCancelMarker = () => {
+        onCancelMarker();
+    }
+
   return(
         <Form onSubmit={e => { handleSubmit(e) }}>
           <Form.Group className="mb-3">
@@ -34,8 +39,9 @@ function MarkerForm({submitMarker}){
                 value={time} 
                 onChange={ e => setTime(e.target.value)}
               />
-            </Form.Group>
-            <Button type='submit'>Submit Marker</Button>
+            </Form.Group>  
+                <Button type='submit'>Submit Marker</Button>
+                <Button onClick={handleCancelMarker}>Cancel </Button>
           </Row>
         </Form>
   );

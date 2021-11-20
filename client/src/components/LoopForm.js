@@ -3,7 +3,7 @@ import Loop from './Loop'
 import {Button, Container, Stack, Row, Col, CloseButton, Text, Form} from 'react-bootstrap';
 
 
-function LoopForm({submitLoop}){
+function LoopForm({submitLoop, onCancelLoop}){
 
   const [title, setTitle] = useState();
   const [colour, setColour] = useState();
@@ -15,6 +15,12 @@ function LoopForm({submitLoop}){
     e.preventDefault();
 
   }
+
+  const handleCancelLoop = () => {
+    onCancelLoop();
+}
+
+
   return(
         <Form onSubmit={e => { handleSubmit(e) }}>
           <Form.Group className="mb-3">
@@ -47,6 +53,7 @@ function LoopForm({submitLoop}){
               />
             </Form.Group>
             <Button type='submit'>Submit Loop</Button>
+            <Button onClick={handleCancelLoop}>Cancel</Button>
           </Row>
         </Form>
   );

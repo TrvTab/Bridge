@@ -26,6 +26,10 @@ function LoopList(props){
         </li>])
     }
 
+    const handleCancelLoop = () => {
+      setShowForm(false);
+  }
+
     const handleGoToLoop = (key,request) => {
       let sampleItem = loopItems.find(item => item.key === key)
       console.log(sampleItem)
@@ -67,7 +71,7 @@ function LoopList(props){
         )}
         {showForm && (
             <div>
-                <LoopForm submitLoop={submitLoop}></LoopForm>
+                <LoopForm submitLoop={submitLoop} onCancelLoop={handleCancelLoop}></LoopForm>
             </div>
         )}
         
