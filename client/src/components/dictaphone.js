@@ -108,7 +108,7 @@ function Dictaphone(props) {
       <p>Microphone: {listening ? 'on' : 'off'}</p>
       <button onClick={SpeechRecognition.startListening}>Start Mic Rec.</button>
       <button onClick={SpeechRecognition.stopListening}>Stop Mic</button>
-      <button onClick={resetTranscript}>Reset Mic</button>
+      <button onClick={resetTranscript}>Reset Mic Text</button>
       <p>{transcript}</p>
     </div>
   );
