@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import { findDOMNode } from 'react-dom'
 import Dictaphone from '../dictaphone'
-import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
+import './player.css'
 
 import { updateAndNotify } from 'react'
 
@@ -280,9 +280,9 @@ class Player extends Component {
           
 
           <Container>
-            <Row>
-              <Col><input
-                      type='range' min={0} max={0.999999} step='any'
+            <Row >
+              <Col lg={true} md={8}><input
+                      type='range' min={0} max={0.999999} step='any' style={{width: "700px"}}
                       value={played}
                       onMouseDown={this.handleSeekMouseDown}
                       onChange={this.handleSeekChange}
@@ -292,11 +292,11 @@ class Player extends Component {
             </Row>
             <Row>
               <Col>
-              <button onClick={this.handleSkipBackwardClick} value={15}>Rewind 15s</button>
-              <button onClick={this.handlePlayPause}>{playing ? 'Pause' : 'Play'}</button>
-              <button onClick={this.handleSkipForwardClick} value={15}>Skip 15s</button>
-
-              <select onChange={this.handleSetPlaybackRate} name="playback speed" id="playbackSpeed" >
+              <button className="controlButton" onClick={this.vocalRestart} value={15}>Restart</button>
+              <button className="controlButton"  onClick={this.handleSkipBackwardClick} value={15}>Rewind 15s</button>
+              <button className="controlButton"  onClick={this.handlePlayPause}>{playing ? 'Pause' : 'Play'}</button>
+              <button className="controlButton"  onClick={this.handleSkipForwardClick} value={15}>Skip 15s</button>
+              <select className="controlButton"  onChange={this.handleSetPlaybackRate} name="playback speed" id="playbackSpeed" >
                 <option value={0.25}>0.25x</option>
                 <option value={0.50}>0.50x</option>
                 <option value={0.75}>0.75x</option>
@@ -305,6 +305,7 @@ class Player extends Component {
                 <option value={1.50}>1.50x</option>
                 <option value={1.75}>1.75x</option>
               </select>
+              
               <input type='range' min={0} max={1} step='any' value={volume} onChange={this.handleVolumeChange} />
 
               </Col>
