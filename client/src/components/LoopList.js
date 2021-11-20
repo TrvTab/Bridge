@@ -57,7 +57,7 @@ function LoopList(props){
     }
 
     return (
-      
+      <div style={{height: 80, width:400, float:'left'}}>
       <Container>
         {!showForm && (
           <ul>
@@ -71,8 +71,8 @@ function LoopList(props){
             </div>
         )}
         
-
       </Container>
+      </div>
     );
 }
 export default LoopList;

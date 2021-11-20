@@ -28,6 +28,8 @@ function InfoModal(props) {
             Jump to marker timestamp = <em>'go to marker :name'</em> <br/>
             Jump to loop and repeatedly perform desired loop : <em>'go to loop :name'</em> <br/>
             Exit loop = <em>'exit loop' </em><br/>
+            Pause = <em>'pause'</em>
+            Pause = <em>'play'</em>
           </p>
           <h4>Commands that should be done without voice commands</h4>
           <p>
