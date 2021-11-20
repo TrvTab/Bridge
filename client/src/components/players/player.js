@@ -13,6 +13,7 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import './player.css'
 
+import { updateAndNotify } from 'react'
 
 
 
@@ -57,20 +58,6 @@ class Player extends Component {
     this.setState({inLoop: false})
   }
 
-  handlePlayPause = () => {
-    this.setState({ playing: !this.state.playing })
-  }
-
-  vocalPause() {
-    this.handlePlayPause()
-  }
-
-  vocalPlay() {
-    this.handlePlayPause()
-  }
-
- 
-
   // add if statements for 
   handleDictaphoneData = (childData) => {
     this.setState(() => {
@@ -82,8 +69,6 @@ class Player extends Component {
     else if (childData.request === "skipBwd") this.vocalSkipBackwards(15);
     else if (childData.request === "restart") this.vocalRestart();
     else if (childData.request === "exitLoop") this.vocalExitLoop();
-    else if (childData.request === "pause") this.vocalPause()
-    else if (childData.request === "play") this.vocalPlay()
     else if (childData.request === "addMarker") this.vocalPassInfoToApp(childData);
     else if (childData.request === "addLoop") this.vocalPassInfoToApp(childData)
     else if (childData.request === 'delMarker') this.vocalPassInfoToApp(childData)
@@ -91,7 +76,6 @@ class Player extends Component {
     else if (childData.request === "restart") this.vocalPassInfoToApp(childData);
     else if (childData.request === "goToMarker") this.vocalPassInfoToApp(childData)
     else if (childData.request === "goToLoop") this.vocalPassInfoToApp(childData)
-   
     
   }
   
@@ -105,6 +89,9 @@ class Player extends Component {
     })
   }
 
+  handlePlayPause = () => {
+    this.setState({ playing: !this.state.playing })
+  }
 
   handleStop = () => {
     this.setState({ url: null, playing: false })
@@ -247,6 +234,10 @@ class Player extends Component {
         }
       }
     }
+    if (prevProps.url !== this.props.url){
+      console.log(this.props.url);
+      this.load(this.props.url);
+    }
 
   }
 
@@ -263,8 +254,6 @@ class Player extends Component {
             <ReactPlayer
               ref={this.ref}
               className='react-player'
-              width='100%'
-              height='150%'
               url={url}
               pip={pip}
               playing={playing}
@@ -291,7 +280,7 @@ class Player extends Component {
           </div>
           
           
-          <div className="controlWrapper">
+
           <Container>
             <Row >
               <Col lg={true} md={8}><input
@@ -327,7 +316,8 @@ class Player extends Component {
               </Col>
             </Row>
           </Container>
-          </div>
+         
+                
                   <label style={{marginRight: 10}}for="customUrl"> New Youtube Url </label>
                   <input id="customUrl" ref={input => { this.urlInput = input }} type='text' placeholder='Enter URL' />
                   <button onClick={() => this.setState({ url: this.urlInput.value })}>Load</button>
@@ -337,6 +327,9 @@ class Player extends Component {
 
           
         </section>
+        <footer className='footer'>
+         
+        </footer>
       </div>
     )
   }
