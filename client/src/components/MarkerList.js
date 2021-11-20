@@ -48,7 +48,7 @@ function MarkerList(props){
     
 
     return (
-      <div style={{height: 80, float:'right'}}>
+      <div style={{height: 70, width: 300, float:'right'}}>
       <Container>
         {!showForm && (
           <ul>
@@ -57,7 +57,7 @@ function MarkerList(props){
           </ul>
         )}
         {showForm && (
-            <div style={{marginTop: 20}}>
+            <div>
                 <MarkerForm submitMarker={submitMarker}></MarkerForm>
             </div>
         )}

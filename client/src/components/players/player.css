@@ -12,12 +12,10 @@
 }
 
 .controlWrapper{
-    margin-top: 100px
+    margin-top: 80px
 }
 
 .player-wrapper {
-    width: 400px;
-    height: 150px;
     justify-content: center;
     align-items: center;
     text-align: center;
@@ -32,8 +30,6 @@
     align-items: center;
     justify-content: center;
     text-align: center;
-
-   
     vertical-align: middle;
   }
   
