@@ -7,7 +7,6 @@ import MarkerList from './components/MarkerList.js'
 import {Row, Col, Modal, Button} from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import {useState} from 'react'
-import Popup from './components/popup';
 import InfoModal from './components/InfoModal.js'
 
 function App() {
@@ -39,20 +38,7 @@ function App() {
   }
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      
       <Button variant="primary" onClick={() => setInfoModalShow(true)}>
         Info
       </Button>

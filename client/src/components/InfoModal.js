@@ -14,12 +14,18 @@ function InfoModal(props) {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <h4>Centered Modal</h4>
+          <div>
+          <h4>Commands that should be done using voice (voice commands must be issued exactly like the following to work)</h4>
+          <h6> Note that the words with colons in front of them represent values that you will choose </h6> 
           <p>
-            Cras mattis consectetur purus sit amet fermentum. Cras justo odio,
-            dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac
-            consectetur ac, vestibulum at eros.
+            Add marker at a specific time = 'add marker called :name at :min minutes and :sec seconds'<br>
+            Add a loop that from one time stamp to another: 'Add loop called :name from :firstMin minutes and :firstSec seconds until :secondMin minutes and :secondSec seconds'<br>
+            Delete a marker by its name : 'Delete marker called :name'<br></br>
+
+
+            
           </p>
+          </div>
         </Modal.Body>
         <Modal.Footer>
           <Button onClick={props.onHide}>Close</Button>
