@@ -23,7 +23,7 @@ function MarkerForm({submitMarker, onCancelMarker}){
         <Form onSubmit={e => { handleSubmit(e) }}>
           <Form.Group className="mb-3">
             <Form.Label>Title</Form.Label>
-            <Form.Control placeholder="Marker 1, Marker 2..."
+            <Form.Control placeholder="Guitar, Drop..."
               name='title'
               type='text'
               value={title} 
