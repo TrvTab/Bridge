@@ -316,7 +316,7 @@ class Player extends Component {
           </Container>
          
                 
-                  <label style={{marginRight: 10}}for="customUrl"> New Url </label>
+                  <label style={{marginRight: 10}}for="customUrl"> New Youtube Url </label>
                   <input id="customUrl" ref={input => { this.urlInput = input }} type='text' placeholder='Enter URL' />
                   <button onClick={() => this.setState({ url: this.urlInput.value })}>Load</button>
                
