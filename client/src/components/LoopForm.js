@@ -25,7 +25,7 @@ function LoopForm({submitLoop, onCancelLoop}){
         <Form onSubmit={e => { handleSubmit(e) }}>
           <Form.Group className="mb-3">
             <Form.Label>Title</Form.Label>
-            <Form.Control placeholder="Loop 1, Loop 2..."
+            <Form.Control placeholder="Rift, Solo..."
               name='title'
               type='text'
               value={title} 

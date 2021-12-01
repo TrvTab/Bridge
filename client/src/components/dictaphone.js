@@ -104,6 +104,9 @@ function Dictaphone(props) {
     console.log(event.target.value)
   }
 
+
+  
+
   // Everytime message is updated, reset it and send data to parent
   useEffect(() => {
     props.sendToPlayer(message)
@@ -122,9 +125,9 @@ function Dictaphone(props) {
   return (
     <div>
       <p>Microphone: {listening ? 'on' : 'off'}</p>
-      <button onClick={SpeechRecognition.startListening}>Start</button>
-      <button onClick={SpeechRecognition.stopListening}>Stop</button>
-      <button onClick={resetTranscript}>Reset</button>
+      <button onClick={SpeechRecognition.startListening}>Start Mic Rec.</button>
+      <button onClick={SpeechRecognition.stopListening}>Stop Mic</button>
+      <button onClick={resetTranscript}>Reset Mic Text</button>
       <p>{transcript}</p>
     </div>
   );
