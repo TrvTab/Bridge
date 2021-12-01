@@ -321,9 +321,9 @@ class Player extends Component {
             <Row>
               <Col>
               <button className="controlButton" onClick={this.vocalRestart} value={15}>Restart</button>
-              <button className="controlButton"  onClick={this.handleSkipBackwardClick} value={15}>Rewind 15s</button>
+              <button className="controlButton"  onClick={this.handleSkipBackwardClick} value={15}>Skip Backwards</button>
               <button className="controlButton"  onClick={this.handlePlayPause}>{playing ? 'Pause' : 'Play'}</button>
-              <button className="controlButton"  onClick={this.handleSkipForwardClick} value={15}>Skip 15s</button>
+              <button className="controlButton"  onClick={this.handleSkipForwardClick} value={15}>Skip Forwards</button>
               <select className="controlButton"  onChange={this.handleSetPlaybackRate} name="playback speed" id="playbackSpeed" >
                 <option value={0.25}>0.25x</option>
                 <option value={0.50}>0.50x</option>

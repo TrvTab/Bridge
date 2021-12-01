@@ -16,32 +16,51 @@ function Dictaphone(props) {
 
     //Add marker and loop with name
     {
-      command: 'add marker called :name at :min minutes and :sec seconds',
+      command: 'add marker (called) :name at :min minute(s) (and) :sec second(s)',
       callback: (name, min, sec) => setMessage({request: 'addMarker', name: name.toLowerCase(), firstTimeStamp: (min + ":" + (sec.length===1 ? "0" + sec : sec))})
     },
     {
-      command: 'Add loop called :name from :firstMin minutes and :firstSec seconds until :secondMin minutes and :secondSec seconds',
+      command: 'add loop (called) :name from :firstMin minute(s) (and) :firstSec second(s) until :secondMin minute(s) and :secondSec second(s)',
+      callback: (name, firstMin, firstSec, secondMin, secondSec) => 
+          setMessage({request: 'addLoop', name: name.toLowerCase(), firstTimeStamp: (firstMin + ":" + (firstSec.length===1 ? "0" + firstSec : firstSec)), secondTimeStamp: (secondMin + ":" + (secondSec.length===1 ? "0" + secondSec : secondSec))})
+    },
+    {
+      command: 'create marker (called) :name at :min minute(s) (and) :sec second(s)',
+      callback: (name, min, sec) => setMessage({request: 'addMarker', name: name.toLowerCase(), firstTimeStamp: (min + ":" + (sec.length===1 ? "0" + sec : sec))})
+    },
+    {
+      command: 'create loop (called) :name from :firstMin minute(s) (and) :firstSec second(s) until :secondMin minute(s) (and) :secondSec second(s)',
       callback: (name, firstMin, firstSec, secondMin, secondSec) => 
           setMessage({request: 'addLoop', name: name.toLowerCase(), firstTimeStamp: (firstMin + ":" + (firstSec.length===1 ? "0" + firstSec : firstSec)), secondTimeStamp: (secondMin + ":" + (secondSec.length===1 ? "0" + secondSec : secondSec))})
     },
     //Delete marker and loop 
     {
-      command: 'Delete marker called :name',
+      command: 'delete marker (called) :name',
       callback: (name) => 
           setMessage({request: 'delMarker', name: name.toLowerCase()})
     },
     {
-      command: 'Delete loop called :name',
+      command: 'delete loop (called) :name',
       callback: (name) => 
           setMessage({request: 'delLoop', name: name.toLowerCase()})
     },
     {
-      command: 'skip forward',
+      command: 'remove marker (called) :name',
+      callback: (name) => 
+          setMessage({request: 'delMarker', name: name.toLowerCase()})
+    },
+    {
+      command: 'remove loop (called) :name',
+      callback: (name) => 
+          setMessage({request: 'delLoop', name: name.toLowerCase()})
+    },
+    {
+      command: 'skip forward(s)',
       callback: () =>
           setMessage({request: 'skipFwd'})
     },
     {
-      command: 'skip backwards',
+      command: 'skip backward(s)',
       callback: () =>
           setMessage({request: 'skipBwd'})
     },
@@ -51,11 +70,11 @@ function Dictaphone(props) {
           setMessage({request: 'restart'})
     },
     {
-      command: 'go to marker :name',
+      command: 'go to marker (called) :name',
       callback:(name) => setMessage({request: 'goToMarker', name: name.toLowerCase()})
     },
     {
-      command: 'go to loop :name',
+      command: 'go to loop (called) :name',
       callback:(name) => setMessage({request: 'goToLoop', name: name.toLowerCase()})
     },
     {
