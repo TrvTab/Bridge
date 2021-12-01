@@ -36,7 +36,9 @@ class Player extends Component {
     playbackRate: 1.0,
     loop: false,
     dictaphoneData: [],
-    inLoop: false
+    inLoop: false,
+    loopStartTime: "",
+    loopEndTime: ""
   }
 
   vocalSkipForward(time){
@@ -184,6 +186,11 @@ class Player extends Component {
   handleProgress = state => {
    // console.log('onProgress', state)
     // We only want to update time slider if we are not currently seeking
+    if (this.state.inLoop === true) {
+      if ((this.state.played * this.state.duration) >= this.state.loopEndTime - 1){
+        this.player.seekTo(this.state.loopStartTime)
+      }
+    }
     if (!this.state.seeking) {
       this.setState(state)
     }
@@ -214,6 +221,19 @@ class Player extends Component {
     totalSeconds += parseInt(seconds)
     return totalSeconds
   }
+  convertToMinutes(time) {
+    let minutes = parseInt(time/60)
+    let seconds = (Math.round(60*((time/60) - minutes))).toString()
+    if (seconds.length == 1) {
+      seconds = "0" + seconds
+    }
+    return minutes + ":" + seconds
+  }
+
+  displayDurationWithTimeStamp(timeFraction, totalDuration){
+    let totalSeconds = timeFraction * totalDuration
+    return this.convertToMinutes(totalSeconds)
+  }
 
   
 
@@ -221,22 +241,20 @@ class Player extends Component {
     this.player = player
   }
 
+
   componentDidUpdate(prevProps) {
     if (prevProps.reply !== this.props.reply) {
       if (this.props.reply.request === "goToMarker"){
+
         this.player.seekTo(this.convertToSeconds(this.props.reply.time), "seconds")
       }
       else if (this.props.reply.request === "goToLoop") {
-        this.setState({inLoop: true})
-        console.log(this.state.inLoop)
-        this.player.seekTo(this.convertToSeconds(this.props.reply.startTime), "seconds")
-        
-        while (this.state.inLoop) {
-          console.log("inloop")
-          if (this.player.getCurrentTime() >= this.convertToSeconds(this.props.reply.endTime)){
-            this.player.seekTo(this.convertToSeconds(this.props.reply.startTime), "seconds")
-          }
+        console.log("HELLO")
+        console.log(this.props.reply)
+        this.setState({inLoop: true, loopStartTime: this.convertToSeconds(this.props.reply.startTime), loopEndTime: this.convertToSeconds(this.props.reply.endTime)}, () =>{
+          this.player.seekTo(this.convertToSeconds(this.props.reply.startTime), "seconds")
         }
+        );
       }
     }
     if (prevProps.url !== this.props.url){
@@ -247,7 +265,7 @@ class Player extends Component {
   }
 
   render () {
-    const { url, playing, controls, light, volume, muted, loop, played, loaded, duration, playbackRate, pip, dictaphoneData, inLoop } = this.state
+    const { url, playing, controls, light, volume, muted, loop, played, loaded, duration, playbackRate, pip, dictaphoneData, inLoop, loopStartTime, loopEndTime } = this.state
     const SEPARATOR = ' · '
 
     return (
@@ -288,13 +306,16 @@ class Player extends Component {
 
           <Container>
             <Row >
-              <Col lg={true} md={8}><input
+              <Col lg={true} md={8}>
+                <span>{this.displayDurationWithTimeStamp(this.state.played, this.state.duration)}</span>
+                <input
                       type='range' min={0} max={0.999999} step='any' style={{width: "700px"}}
                       value={played}
                       onMouseDown={this.handleSeekMouseDown}
                       onChange={this.handleSeekChange}
                       onMouseUp={this.handleSeekMouseUp}
                     />
+                    <span>{this.convertToMinutes(this.state.duration)}</span>
               </Col>
             </Row>
             <Row>
