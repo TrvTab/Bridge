@@ -59,7 +59,7 @@ class Player extends Component {
   }
 
   vocalRestart(){
-    this.player.seekTo(0, "seconds")
+    this.player.seekTo(1, "seconds")
   }
 
   vocalExitLoop() {
@@ -195,6 +195,10 @@ class Player extends Component {
   handleSkipBackwardClick = e => {
     console.log(e)
     this.player.seekTo(this.player.getCurrentTime() - parseInt(e.target.value), "seconds")
+  }
+
+  handleRestartClick = e => {
+    this.player.seekTo(0, "seconds")
   }
 
   handleProgress = state => {
@@ -340,7 +344,7 @@ class Player extends Component {
             </Row>
             <Row>
               <Col>
-              <button className="controlButton" onClick={this.vocalRestart} value={15}>Restart</button>
+              <button className="controlButton" onClick={this.handleRestartClick} value={15}>Restart</button>
               <button className="controlButton"  onClick={this.handleSkipBackwardClick} value={15}>Skip Backwards</button>
               <button className="controlButton"  onClick={this.handlePlayPause}>{playing ? 'Pause' : 'Play'}</button>
               <button className="controlButton"  onClick={this.handleSkipForwardClick} value={15}>Skip Forwards</button>
