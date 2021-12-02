@@ -88,7 +88,6 @@ class Player extends Component {
     else if (childData.request === "addLoop") this.vocalPassInfoToApp(childData)
     else if (childData.request === 'delMarker') this.vocalPassInfoToApp(childData)
     else if (childData.request === "delLoop") this.vocalPassInfoToApp(childData);
-    else if (childData.request === "restart") this.vocalPassInfoToApp(childData);
     else if (childData.request === "goToMarker") this.vocalPassInfoToApp(childData)
     else if (childData.request === "goToLoop") this.vocalPassInfoToApp(childData)
     
