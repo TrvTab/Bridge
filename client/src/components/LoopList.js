@@ -37,7 +37,11 @@ function LoopList(props){
     }
 
     const handleLoopClicked = (key) => {
-      console.log("LOOP??")
+      // console.log("LOOP??")
+      // setLoopItems(loopItems => loopItems.map(item => {
+      //   if(item.key!== key)
+      //     console.log("HELLO")
+      // }));
       setGoToLoopDest(key);
     }
 
