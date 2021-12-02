@@ -14,7 +14,6 @@ function MarkerList(props){
     }
 
     const convertToMinutes = time => {
-      console.log(time)
       let minutes = parseInt(time/60)
       let seconds = (Math.round(60*((time/60) - minutes))).toString()
       if (seconds.length === 1) {
