@@ -62,7 +62,8 @@ function LoopList(props){
     }, [goToLoopDest])
 
     const validateAddLoop = (commandData) => {
-      if (!between(commandData.time, 0, commandData.duration)){
+      if (!between(commandData.firstTimeStamp, 0, commandData.duration)
+        || !between(commandData.secondTimeStamp, 0, commandData.duration)) {
         setErrorMessage("Loop exceeds video limits")
         return false
       }
@@ -80,7 +81,7 @@ function LoopList(props){
       }
       return found
     }
-    
+
     useEffect(() => {
       if (props.commandInformation.request.includes("marker")){
         return;
