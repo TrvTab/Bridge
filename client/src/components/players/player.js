@@ -28,7 +28,7 @@ class Player extends Component {
     playing: true,
     controls: false,
     light: false,
-    volume: 0.8,
+    volume: 0.2,
     muted: false,
     played: 0,
     loaded: 0,
