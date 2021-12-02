@@ -38,3 +38,24 @@
     transform: rotate(360deg);
   }
 }
+
+.custom-modal-header {
+  background-color: #334756;
+  color: #c6cfff;
+}
+
+.bridge-logo {
+  background: url(./images/logo.svg) no-repeat;
+  cursor: pointer;
+  border: none;
+  width: 500px;
+  height: 125px;
+  text-decoration: none;
+  display: inline-block;
+  padding: 50px;
+}
+
+.bridge-intro {
+  width: 400px;
+  text-align: center;
+}
