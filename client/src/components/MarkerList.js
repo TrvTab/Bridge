@@ -2,7 +2,8 @@ import { useState, useEffect} from 'react'
 import Marker from './Marker'
 import MarkerForm from './MarkerForm'
 import {Button, Container, Stack, Row, Col, CloseButton, Text, Form} from 'react-bootstrap';
-import {convertToMinutes, convertToSeconds, between } from "../Utils"
+import {convertToMinutes, convertToSeconds, between, validateName } from "../Utils";
+import "./MarkerList.css";
 
 
 function MarkerList(props){
@@ -13,7 +14,7 @@ function MarkerList(props){
 
 
     const handleCancelMarker = () => {
-        setShowForm(false);
+      setShowForm(false);
     }
 
     const handleRemove = (key) => {
@@ -21,6 +22,9 @@ function MarkerList(props){
     }
 
     const submitMarker = (title, colour, time) => {
+      let returnedErrorMessage = validateName(title, markerItems);
+      setErrorMessage(returnedErrorMessage)
+      if(!returnedErrorMessage){
         setShowForm(false)
         setMarkerItems(markerItems => [...markerItems,
         <li list-style="none" key={title}>
@@ -29,6 +33,7 @@ function MarkerList(props){
                 <CloseButton onClick={() => handleRemove(title)}></CloseButton>
             </Row>
         </li>])
+      }
     }
 
     const handleMarkerClicked = (key) => {
@@ -107,12 +112,12 @@ function MarkerList(props){
         {!showForm && (
           <ul>
             {markerItems}
-            <Button onClick={addMarker}>Add Marker</Button>
+            <Button className="custom-btn" onClick={addMarker}>Add Marker</Button>
           </ul>
         )}
         {showForm && (
             <div style={{marginTop: 20}}>
-                <MarkerForm submitMarker={submitMarker} onCancelMarker={handleCancelMarker}></MarkerForm>
+                <MarkerForm errorMessage={errorMessage} submitMarker={submitMarker} onCancelMarker={handleCancelMarker}></MarkerForm>
             </div>
         )}
 
