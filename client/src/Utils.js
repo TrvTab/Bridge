@@ -1,7 +1,7 @@
 
-export const between = (time, min , max) => {
-    if (min > time) {
-      if (max < time) {
+export const between = (time, min, max) => {
+    if (time > min) {
+      if (time < max) {
         return true
       }
     }

@@ -55,12 +55,18 @@ function MarkerList(props){
     }, [goToMarkerDest])
 
     const validateAddMarker = (commandData) => {
-      if (!between(commandData.time, 0, commandData.duration)){
+      if (!between(commandData.firstTimeStamp, 0, commandData.duration)){
+        console.log("fuck")
+        console.log(commandData)
+
         setErrorMessage("Marker exceeds video limits")
         return false
       }
+      console.log("afterBetween")
+
       let duplicate = markerItems.find(element => commandData.name === element.key)
       if (duplicate) {
+        console.log("duplicateFalse")
         return false
       }
       return true
@@ -82,10 +88,12 @@ function MarkerList(props){
           submitMarker(props.commandInformation.name, "colour", convertToMinutes(props.commandInformation.firstTimeStamp));
         }
       } else if (props.commandInformation.request === "delMarker"){
+        console.log("delMarker")
         if (validateMarkerPresent(props.commandInformation)){
           handleRemove(props.commandInformation.name)
         }
       } else if (props.commandInformation.request === "goToMarker"){
+        console.log("goToMarker")
         if (validateMarkerPresent(props.commandInformation)){
 
           handleGoToMarker(props.commandInformation.name, props.commandInformation.request);       
@@ -95,6 +103,7 @@ function MarkerList(props){
     }, [props.commandInformation])
 
     const addMarker = () => {
+        props.onAddMarkerFormRequest()
         setShowForm(true)
     }
     
