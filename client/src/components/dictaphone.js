@@ -2,6 +2,8 @@
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
 import { useState, useEffect } from 'react'
 
+import "./dictaphone.css"
+
 
 function Dictaphone(props) {
 
@@ -21,7 +23,7 @@ function Dictaphone(props) {
     },
     {
       command: 'add loop (called) :name from :firstMin minute(s) (and) :firstSec second(s) until :secondMin minute(s) and :secondSec second(s)',
-      callback: (name, firstMin, firstSec, secondMin, secondSec) => 
+      callback: (name, firstMin, firstSec, secondMin, secondSec) =>
           setMessage({request: 'addLoop', name: name.toLowerCase(), firstTimeStamp: 60 * parseInt(firstMin) + parseInt(firstSec), secondTimeStamp: 60 * parseInt(secondMin) + parseInt(secondSec)})
     },
     {
@@ -30,28 +32,28 @@ function Dictaphone(props) {
     },
     {
       command: 'create loop (called) :name from :firstMin minute(s) (and) :firstSec second(s) until :secondMin minute(s) (and) :secondSec second(s)',
-      callback: (name, firstMin, firstSec, secondMin, secondSec) => 
+      callback: (name, firstMin, firstSec, secondMin, secondSec) =>
           setMessage({request: 'addLoop', name: name.toLowerCase(), firstTimeStamp: 60 * parseInt(firstMin)+ parseInt(firstSec), secondTimeStamp: 60 * parseInt(secondMin) + parseInt(secondSec)})
     },
-    //Delete marker and loop 
+    //Delete marker and loop
     {
       command: 'delete marker (called) :name',
-      callback: (name) => 
+      callback: (name) =>
           setMessage({request: 'delMarker', name: name.toLowerCase()})
     },
     {
       command: 'delete loop (called) :name',
-      callback: (name) => 
+      callback: (name) =>
           setMessage({request: 'delLoop', name: name.toLowerCase()})
     },
     {
       command: 'remove marker (called) :name',
-      callback: (name) => 
+      callback: (name) =>
           setMessage({request: 'delMarker', name: name.toLowerCase()})
     },
     {
       command: 'remove loop (called) :name',
-      callback: (name) => 
+      callback: (name) =>
           setMessage({request: 'delLoop', name: name.toLowerCase()})
     },
     {
@@ -98,8 +100,8 @@ function Dictaphone(props) {
     resetTranscript,
     browserSupportsSpeechRecognition
   } = useSpeechRecognition({commands});
-  
-  
+
+
   function handleTranscriptChange(event){
     console.log(event.target.value)
   }
@@ -126,14 +128,14 @@ function Dictaphone(props) {
   return (
 
     <div>
-      
+
       <p>Microphone: {listening ? 'on' : 'off'}</p>
-      <button onClick={SpeechRecognition.startListening}>Start Mic Rec.</button>
-      <button onClick={SpeechRecognition.stopListening}>Stop Mic</button>
-      <button onClick={resetTranscript}>Reset Mic Text</button>
+      <button className = 'controlButton' onClick={SpeechRecognition.startListening}>Start Mic Rec.</button>
+      <button className = 'controlButton' onClick={SpeechRecognition.stopListening}>Stop Mic</button>
+      <button className = 'controlButton' onClick={resetTranscript}>Reset Mic Text</button>
       <p>{transcript}</p>
-       
-    
+
+
     </div>
 
   );

@@ -3,19 +3,21 @@ import Loop from './Loop'
 import LoopForm from './LoopForm'
 import {Button, Container, Stack, Row, Col, CloseButton, Text, Form} from 'react-bootstrap';
 
+import "./dictaphone.css"
+
 
 function LoopList(props){
     const [loopItems, setLoopItems] = useState([])
     const [showForm, setShowForm] = useState(false)
     const [goToLoopDest, setGoToLoopDest] = useState("")
 
-   
+
 
     const handleRemove = (key) => {
         console.log("TEEEEST", key)
         setLoopItems(loopItems => loopItems.filter((item) => item.key !== key))
     }
-    
+
     const submitLoop = (title, colour, startTime, endTime) => {
         setShowForm(false)
         setLoopItems(loopItems => [...loopItems,
@@ -63,7 +65,7 @@ function LoopList(props){
       let foundItem = loopItems.find(item => item.key === key).props.children.props.children[0].props
       let startTimeSeconds = convertToSeconds(foundItem.startTime)
       let endTimeSeconds = convertToSeconds(foundItem.endTime)
-      
+
       let foundItemCopy =  Object.assign({request: request}, foundItem)
       foundItemCopy.startTime = startTimeSeconds
       foundItemCopy.endTime = endTimeSeconds
@@ -80,7 +82,7 @@ function LoopList(props){
     useEffect(() => {
       if (props.commandInformation.request.includes("marker")){
         return;
-      } 
+      }
       else if (props.commandInformation.request === "addLoop"){
        submitLoop(props.commandInformation.name, "colour",  convertToMinutes(props.commandInformation.firstTimeStamp),  convertToMinutes(props.commandInformation.secondTimeStamp))
       }
@@ -95,7 +97,7 @@ function LoopList(props){
       }
     }, [props.commandInformation])
 
-    
+
 
     const addLoop = () => {
         setShowForm(true)
@@ -107,7 +109,7 @@ function LoopList(props){
         {!showForm && (
           <ul>
             {loopItems}
-            <Button onClick={addLoop}>Add Loop</Button>
+            <Button className='controlButton' onClick={addLoop}>Add Loop</Button>
           </ul>
         )}
         {showForm && (
@@ -115,7 +117,7 @@ function LoopList(props){
                 <LoopForm submitLoop={submitLoop} onCancelLoop={handleCancelLoop}></LoopForm>
             </div>
         )}
-        
+
       </Container>
       </div>
     );

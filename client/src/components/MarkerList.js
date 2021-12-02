@@ -2,6 +2,7 @@ import { useState, useEffect} from 'react'
 import Marker from './Marker'
 import MarkerForm from './MarkerForm'
 import {Button, Container, Stack, Row, Col, CloseButton, Text, Form} from 'react-bootstrap';
+import "./dictaphone.css"
 
 
 function MarkerList(props){
@@ -21,7 +22,7 @@ function MarkerList(props){
       }
       return minutes + ":" + seconds
     }
-    
+
     const convertToSeconds = (time) => {
       let arr = time.split(":")
       var [minutes, seconds] = arr;
@@ -71,14 +72,14 @@ function MarkerList(props){
       } else if (props.commandInformation.request === "delMarker"){
         handleRemove(props.commandInformation.name)
       } else if (props.commandInformation.request === "goToMarker"){
-          handleGoToMarker(props.commandInformation.name, props.commandInformation.request);       
-      } 
+          handleGoToMarker(props.commandInformation.name, props.commandInformation.request);
+      }
     }, [props.commandInformation])
 
     const addMarker = () => {
         setShowForm(true)
     }
-    
+
     console.log("test")
     return (
       <div style={{height: 70, width: 300, float:'right'}}>
@@ -86,7 +87,7 @@ function MarkerList(props){
         {!showForm && (
           <ul>
             {markerItems}
-            <Button onClick={addMarker}>Add Marker</Button>
+            <Button className = 'controlButton' onClick={addMarker}>Add Marker</Button>
           </ul>
         )}
         {showForm && (

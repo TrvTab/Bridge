@@ -83,7 +83,7 @@ class Player extends Component {
   }
 
 
-  // add if statements for 
+  // add if statements for
   handleDictaphoneData = (childData) => {
     this.setState(() => {
       return {
@@ -103,9 +103,9 @@ class Player extends Component {
     else if (childData.request === "restart") this.vocalPassInfoToApp(childData);
     else if (childData.request === "goToMarker") this.vocalPassInfoToApp(childData)
     else if (childData.request === "goToLoop") this.vocalPassInfoToApp(childData)
-    
+
   }
-  
+
 
   load = url => {
     this.setState({
@@ -116,7 +116,7 @@ class Player extends Component {
     })
   }
 
-  
+
 
   handleStop = () => {
     this.setState({ url: null, playing: false })
@@ -188,7 +188,7 @@ class Player extends Component {
 
   handleSeekMouseUp = e => {
     this.setState({ seeking: false })
-    
+
     this.player.seekTo(parseFloat(e.target.value))
   }
 
@@ -204,7 +204,7 @@ class Player extends Component {
   handleProgress = state => {
    // console.log('onProgress', state)
     // We only want to update time slider if we are not currently seeking
-    
+
     if (!this.state.seeking) {
       this.setState(state)
     }
@@ -254,7 +254,7 @@ class Player extends Component {
     return this.convertToMinutes(totalSeconds)
   }
 
-  
+
 
   ref = player => {
     this.player = player
@@ -288,7 +288,7 @@ class Player extends Component {
     const SEPARATOR = ' · '
 
     return (
-      
+
       <div className='app'>
         <section className='section'>
           <h1>Bridge</h1>
@@ -320,8 +320,8 @@ class Player extends Component {
               onDuration={this.handleDuration}
             />
           </div>
-          
-          
+
+
 
           <Container>
             <Row >
@@ -352,7 +352,7 @@ class Player extends Component {
                 <option value={1.50}>1.50x</option>
                 <option value={1.75}>1.75x</option>
               </select>
-              
+
               <div style={{marginTop: 15}}>
               <input id="volume" name="volume" type='range' min={0} max={1} step='any' value={volume} onChange={this.handleVolumeChange}  />
               <label for="volume">Volume</label>
@@ -361,19 +361,19 @@ class Player extends Component {
               </Col>
             </Row>
           </Container>
-         
-                
+
+
                   <label style={{marginRight: 10}}for="customUrl"> New Youtube Url </label>
                   <input id="customUrl" ref={input => { this.urlInput = input }} type='text' placeholder='Enter URL' />
-                  <button onClick={() => this.setState({ url: this.urlInput.value })}>Load</button>
-               
+                  <button className="controlButton" onClick={() => this.setState({ url: this.urlInput.value })}>Load</button>
+
 
           <Dictaphone sendToPlayer={this.handleDictaphoneData}/>
 
-          
+
         </section>
         <footer className='footer'>
-         
+
         </footer>
       </div>
     )
