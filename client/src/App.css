@@ -1,7 +1,9 @@
 .App {
   text-align: center;
   background-color: #ffffff;
-  padding: 40px;
+  padding-top: 0px;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 .App-logo {

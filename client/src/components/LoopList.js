@@ -126,7 +126,7 @@ function LoopList(props){
     }
 
     return (
-      <div style={{height: 80, width:300, float:'left'}}>
+      <div style={{height: 0, width:300, float:'left'}}>
       <Container className="custom-container">
         {!showForm && (
           <ul>
