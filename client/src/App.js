@@ -16,8 +16,7 @@ function App() {
   const [showLandingPage, setShowLandingPage] = useState(true);
   const [url, setUrl] = useState();
   const [urlInput, setUrlInput] = useState();
-  const [currentTimeRequest, setCurrentTimeRequest] = useState(false)
-  const [currentTime, setCurrentTime] = useState("")
+
 
   const [command, setCommandState] = useState({
     request: '',
@@ -48,15 +47,6 @@ function App() {
   function handleSubmitUrl(){
     setShowLandingPage(false)
     setUrl(urlInput.value);
-  }
-
-  function handleCurrentTimeRequest() {
-    setCurrentTimeRequest(true)
-
-  }
-
-  function handleReturnCurrentTime() {
-
   }
 
 
@@ -103,7 +93,6 @@ function App() {
               <MarkerList
                 commandInformation={command}
                 onFoundTimeElement={handleFoundTimeElement}
-                onCurrentTimeRequest={handleCurrentTimeRequest}
               ></MarkerList>
             </Col>
           </Row>

@@ -16,8 +16,6 @@ function MarkerList(props){
         setShowForm(false);
     }
 
-    
-
     const handleRemove = (key) => {
         setMarkerItems(markerItems => markerItems.filter((item) => item.key !== key))
     }
@@ -38,10 +36,6 @@ function MarkerList(props){
     }
 
     const handleGoToMarker = (key,request) => {
-      console.log("ADSKSOKAOSKDSAOK")
-      console.log(markerItems);
-      console.log(key)
-      
       let foundItem = markerItems.find(item => item.key === key).props.children.props.children[0].props
       let timeSeconds = convertToSeconds(foundItem.time)
       let foundItemCopy =  Object.assign({request: request}, foundItem)
@@ -103,7 +97,6 @@ function MarkerList(props){
     }, [props.commandInformation])
 
     const addMarker = () => {
-        props.onAddMarkerFormRequest()
         setShowForm(true)
     }
     
