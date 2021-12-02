@@ -60,7 +60,7 @@ function App() {
             <Modal.Title>Bridge</Modal.Title>
             <div className="bridge-logo"></div>
           </Modal.Header>
-          <Modal.Body class="modal-content" align="center">
+          <Modal.Body class="custom-modal-body" align="center">
             <p className="bridge-intro">
               Welcome to Bridge, a web application that bridges the gap between
               transcribing music and digital media. This product offers a
