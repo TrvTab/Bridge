@@ -56,8 +56,8 @@ function App() {
           fullscreen={fullscreenLandingPage}
           onHide={() => setShowLandingPage(false)}
         >
-          <Modal.Header className="custom-modal-header" closeButton>
-            <Modal.Title>Bridge</Modal.Title>
+          <Modal.Header className="custom-modal-header">
+            <Modal.Title className="custom-modal-title">Bridge</Modal.Title>
             <div className="bridge-logo"></div>
           </Modal.Header>
           <Modal.Body class="custom-modal-body" align="center">
@@ -72,7 +72,7 @@ function App() {
             </p>
             <h1>Get Started</h1>
             <th>Copy Paste YouTube Link</th>
-            <td>
+
               <input
                 ref={(input) => {
                   setUrlInput(input);
@@ -80,10 +80,8 @@ function App() {
                 type="text"
                 placeholder="Enter URL"
               />
-            </td>
-            <td>
               <button onClick={handleSubmitUrl}> Go</button>
-            </td>
+
           </Modal.Body>
         </Modal>
       )}
