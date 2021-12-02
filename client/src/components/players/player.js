@@ -53,21 +53,9 @@ class Player extends Component {
     this.props.onCommandChange(commandData)
   }
 
-  vocalAddMarker(addMarkerData) {
-    if ((addMarkerData.time > this.state.duration) || addMarkerData.time < 0) {
-      this.setState({errorMessage: "Marker time exceeds limits of video"})
-    }
-    this.vocalPassInfoToApp(addMarkerData)
-  }
-
-  vocalAddLoop(addLoopData) {
-    if ((addLoopData.firstTimeStamp > this.state.duration) || (addLoopData.firstTimeStamp < 0)) {
-      this.setState({errorMessage: "Loop start time exceeds limits of video"})
-    }
-    if ((addLoopData.secondTimeStamp > this.state.duration) || (addLoopData.secondTimeStamp < 0)) {
-      this.setState({errorMessage: "Loop end time exceeds limits of video"})
-    }
-    this.vocalPassInfoToApp(addLoopData)
+  vocalAddElement(addMarkerData) {
+    let commandDataDuration =  Object.assign({duration: this.state.duration}, addMarkerData)
+    this.vocalPassInfoToApp(commandDataDuration)
   }
 
   vocalRestart(){
