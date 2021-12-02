@@ -116,7 +116,7 @@ function MarkerList(props){
         {!showForm && (
           <ul>
             {markerItems}
-            <Button className="custom-btn" onClick={addMarker}>Add Marker</Button>
+            <Button className="custom-button" onClick={addMarker}>Add Marker</Button>
           </ul>
         )}
         {showForm && (
