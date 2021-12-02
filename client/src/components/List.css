@@ -2,13 +2,21 @@
   border-radius: 50px;
   background: #deecff;
   padding: 100px;
-  display: flex;
 }
 
 .custom-btn {
   background-color: #c6cfff !important;
   border: #fff !important;
   color: #000 !important;
+  margin-bottom: 10px;
+}
+
+.custom-btn-item {
+  background-color: #c6cfff !important;
+  border: #fff !important;
+  color: #000 !important;
+  margin-bottom: 10px;
+  width: 50px;
 }
 
 .custom-list-element {
@@ -16,10 +24,14 @@
   border: #000 !important;
   color: #000 !important;
   height: 80px;
+  width: 200px;
 }
 
 ul {
   list-style-type: none;
+  width: max-content;
+  padding: 0px;
+  margin: 0px;
 }
 
 .custom-row {
