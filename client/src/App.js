@@ -61,7 +61,7 @@ function App() {
           <Modal.Header closeButton>
             <Modal.Title>Bridge</Modal.Title>
           </Modal.Header>
-          <Modal.Body><p>Welcome to Bridge, a web application that bridges the gap between transcribing music and digital media. This product offers a hands-free method of manipulating music that provides our users with features such as looping, marking tracks, and playback control. Additionally, these same features can all be controlled through voice commands.
+          <Modal.Body class="modal-content" align="center" width="50px"><p>Welcome to Bridge, a web application that bridges the gap between transcribing music and digital media. This product offers a hands-free method of manipulating music that provides our users with features such as looping, marking tracks, and playback control. Additionally, these same features can all be controlled through voice commands.
             For the best experience possible, it is recommended to use headphones to listen to the music.
           </p>
           <h1>Get Started</h1>
