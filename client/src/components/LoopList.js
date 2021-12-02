@@ -27,8 +27,12 @@ function LoopList(props){
           setLoopItems(loopItems => [...loopItems,
           <li  list-style="none" key={title} className="custom-list-element">
               <Row className='custom-row'>
-                  <Loop title={title} colour={colour} startTime={startTime} endTime={endTime} onLoopClicked={(key) => handleLoopClicked(key)}></Loop>
-              <Button onClick={() => handleRemove(title)}></Button>
+                  <Col>
+                    <Loop title={title} colour={colour} startTime={startTime} endTime={endTime} onLoopClicked={(key) => handleLoopClicked(key)}></Loop>
+                  </Col>
+                  <Col>
+                    <CloseButton onClick={() => handleRemove(title)}></CloseButton>
+                  </Col>
               </Row>
           </li>])
         }
@@ -53,7 +57,8 @@ function LoopList(props){
   }
 
     const handleGoToLoop = (key,request) => {
-      let foundItem = loopItems.find(item => item.key === key).props.children.props.children[0].props
+      console.log(loopItems);
+      let foundItem = loopItems.find(item => item.key === key).props.children.props.children[0].props.children.props
       let startTimeSeconds = convertToSeconds(foundItem.startTime)
       let endTimeSeconds = convertToSeconds(foundItem.endTime)
       

@@ -29,8 +29,12 @@ function MarkerList(props){
         setMarkerItems(markerItems => [...markerItems,
         <li list-style="none" key={title}>
             <Row>
-                <Marker title={title} colour={colour} time={time} onMarkerClicked={(key) => handleMarkerClicked(key)}></Marker>
-                <CloseButton onClick={() => handleRemove(title)}></CloseButton>
+                <Col>
+                  <Marker title={title} colour={colour} time={time} onMarkerClicked={(key) => handleMarkerClicked(key)}></Marker>
+                </Col>
+                <Col>
+                  <CloseButton onClick={() => handleRemove(title)}></CloseButton>
+                </Col>
             </Row>
         </li>])
       }
@@ -41,7 +45,7 @@ function MarkerList(props){
     }
 
     const handleGoToMarker = (key,request) => {
-      let foundItem = markerItems.find(item => item.key === key).props.children.props.children[0].props
+      let foundItem = markerItems.find(item => item.key === key).props.children.props.children[0].props.children.props
       let timeSeconds = convertToSeconds(foundItem.time)
       let foundItemCopy =  Object.assign({request: request}, foundItem)
       foundItemCopy.time = timeSeconds
