@@ -3,7 +3,7 @@ import Marker from './Marker'
 import MarkerForm from './MarkerForm'
 import {Button, Container, Stack, Row, Col, CloseButton, Text, Form} from 'react-bootstrap';
 import {convertToMinutes, convertToSeconds, between, validateName } from "../Utils";
-import "./MarkerList.css";
+import "./List.css";
 
 
 function MarkerList(props){
@@ -108,7 +108,7 @@ function MarkerList(props){
     console.log("test")
     return (
       <div style={{height: 70, width: 300, float:'right'}}>
-      <Container>
+      <Container className="custom-container">
         {!showForm && (
           <ul>
             {markerItems}

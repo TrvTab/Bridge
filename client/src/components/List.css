@@ -1,0 +1,26 @@
+.custom-container {
+  border-radius: 50px / 15px;
+  background: #f3f8ff;
+  padding: 100px;
+}
+
+.custom-btn {
+  background-color: #c6cfff !important;
+  border: #fff !important;
+  color: #000 !important;
+}
+
+.custom-list-element {
+  background-color: #f3f8ff !important;
+  border: #000 !important;
+  color: #000 !important;
+  height: 80px;
+}
+
+ul {
+  list-style-type: none;
+}
+
+.custom-row {
+  width: 100px;
+}

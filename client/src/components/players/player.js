@@ -63,6 +63,7 @@ class Player extends Component {
   }
 
 
+
   vocalExitLoop() {
     this.setState({inLoop: false})
   }
@@ -197,6 +198,10 @@ class Player extends Component {
   handleSkipBackwardClick = e => {
     console.log(e)
     this.player.seekTo(this.player.getCurrentTime() - parseInt(e.target.value), "seconds")
+  }
+
+  handleRestartClick = e => {
+    this.player.seekTo(0, "seconds")
   }
 
   handleProgress = state => {
