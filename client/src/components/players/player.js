@@ -38,7 +38,8 @@ class Player extends Component {
     dictaphoneData: [],
     inLoop: false,
     loopStartTime: "",
-    loopEndTime: ""
+    loopEndTime: "",
+    errorMessage: ""
   }
 
   vocalSkipForward(time){
@@ -50,6 +51,12 @@ class Player extends Component {
 
   vocalPassInfoToApp(commandData) {
     this.props.onCommandChange(commandData)
+  }
+
+  vocalAddMarker(addMarkerData) {
+    if ((addMarkerData.firstTimeStamp > this.state.duration) || (addMarkerData.secondTimeStamp > this.state.duration)) {
+
+    }
   }
 
   vocalRestart(){
@@ -186,13 +193,14 @@ class Player extends Component {
   handleProgress = state => {
    // console.log('onProgress', state)
     // We only want to update time slider if we are not currently seeking
+    
+    if (!this.state.seeking) {
+      this.setState(state)
+    }
     if (this.state.inLoop === true) {
       if ((this.state.played * this.state.duration) >= this.state.loopEndTime - 1){
         this.player.seekTo(this.state.loopStartTime)
       }
-    }
-    if (!this.state.seeking) {
-      this.setState(state)
     }
   }
 
@@ -224,7 +232,7 @@ class Player extends Component {
   convertToMinutes(time) {
     let minutes = parseInt(time/60)
     let seconds = (Math.round(60*((time/60) - minutes))).toString()
-    if (seconds.length == 1) {
+    if (seconds.length === 1) {
       seconds = "0" + seconds
     }
     return minutes + ":" + seconds
@@ -246,13 +254,12 @@ class Player extends Component {
     if (prevProps.reply !== this.props.reply) {
       if (this.props.reply.request === "goToMarker"){
 
-        this.player.seekTo(this.convertToSeconds(this.props.reply.time), "seconds")
+        this.player.seekTo(this.props.reply.time, "seconds")
       }
       else if (this.props.reply.request === "goToLoop") {
-        console.log("HELLO")
         console.log(this.props.reply)
-        this.setState({inLoop: true, loopStartTime: this.convertToSeconds(this.props.reply.startTime), loopEndTime: this.convertToSeconds(this.props.reply.endTime)}, () =>{
-          this.player.seekTo(this.convertToSeconds(this.props.reply.startTime), "seconds")
+        this.setState({inLoop: true, loopStartTime: this.props.reply.startTime, loopEndTime: this.props.reply.endTime}, () =>{
+          this.player.seekTo(this.props.reply.startTime, "seconds")
         }
         );
       }

@@ -12,6 +12,16 @@ function MarkerList(props){
         setShowForm(false);
     }
 
+    const convertToMinutes = time => {
+      console.log(time)
+      let minutes = parseInt(time/60)
+      let seconds = (Math.round(60*((time/60) - minutes))).toString()
+      if (seconds.length === 1) {
+        seconds = "0" + seconds
+      }
+      return minutes + ":" + seconds
+    }
+
 
     const handleRemove = (key) => {
         setMarkerItems(markerItems => markerItems.filter((item) => item.key !== key))
@@ -37,7 +47,7 @@ function MarkerList(props){
     useEffect(() => {
       if (props.commandInformation.request.includes("loop")) return;
       else if (props.commandInformation.request === "addMarker"){
-       submitMarker(props.commandInformation.name, "colour", props.commandInformation.firstTimeStamp);
+       submitMarker(props.commandInformation.name, "colour", convertToMinutes(props.commandInformation.firstTimeStamp));
       } else if (props.commandInformation.request === "delMarker"){
         handleRemove(props.commandInformation.name)
       } else if (props.commandInformation.request === "goToMarker"){

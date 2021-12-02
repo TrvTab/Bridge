@@ -26,6 +26,15 @@ function LoopList(props){
         </li>])
     }
 
+    const convertToMinutes = (time) => {
+      let minutes = parseInt(time/60)
+      let seconds = (Math.round(60*((time/60) - minutes))).toString()
+      if (seconds.length === 1) {
+        seconds = "0" + seconds
+      }
+      return minutes + ":" + seconds
+    }
+
     const handleCancelLoop = () => {
       setShowForm(false);
   }
@@ -42,7 +51,7 @@ function LoopList(props){
         return;
       } 
       else if (props.commandInformation.request === "addLoop"){
-       submitLoop(props.commandInformation.name, "colour", props.commandInformation.firstTimeStamp, props.commandInformation.secondTimeStamp)
+       submitLoop(props.commandInformation.name, "colour",  convertToMinutes(props.commandInformation.firstTimeStamp),  convertToMinutes(props.commandInformation.secondTimeStamp))
       }
        else if (props.commandInformation.request === "delLoop"){
         handleRemove(props.commandInformation.name)
@@ -55,6 +64,7 @@ function LoopList(props){
       }
     }, [props.commandInformation])
 
+    
 
     const addLoop = () => {
         setShowForm(true)
