@@ -1,18 +1,5 @@
-<<<<<<< HEAD
-.controlButton{
-    background-color: #334756;
-    border: none;
-    color: white;
-    padding: 10px 16px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin-right: 15px;
-    border-radius: 5px
-=======
 .controlButton {
-  background-color: #0060ff;
+  background-color: #334756;
   border: none;
   color: white;
   padding: 10px 16px;
@@ -22,7 +9,6 @@
   font-size: 16px;
   margin-right: 15px;
   border-radius: 5px;
->>>>>>> 7508cb3caf362b7fa0914078df09a42f7d11b9ec
 }
 
 .controlWrapper {
@@ -30,24 +16,6 @@
 }
 
 .player-wrapper {
-<<<<<<< HEAD
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    display: inline-block;
-    line-height: normal;
-    vertical-align: middle;
-  }
-
-  .react-player {
-    margin-bottom: 10px;
-    background: rgba(0, 0, 0, 0.1);
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    vertical-align: middle;
-  }
-=======
   justify-content: center;
   align-items: center;
   text-align: center;
@@ -64,4 +32,3 @@
   text-align: center;
   vertical-align: middle;
 }
->>>>>>> 7508cb3caf362b7fa0914078df09a42f7d11b9ec
