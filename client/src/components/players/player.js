@@ -186,14 +186,16 @@ class Player extends Component {
   handleProgress = state => {
    // console.log('onProgress', state)
     // We only want to update time slider if we are not currently seeking
-    if (this.state.inLoop === true) {
-      if ((this.state.played * this.state.duration) >= this.state.loopEndTime - 1){
-        this.player.seekTo(this.state.loopStartTime)
-      }
-    }
+
+
     if (!this.state.seeking) {
       this.setState(state)
     }
+    if ((this.state.played * this.state.duration) >= this.state.loopEndTime){
+      if (this.state.inLoop === true) {
+        this.player.seekTo(this.state.loopStartTime)
+    }
+  }
   }
 
   handleEnded = () => {

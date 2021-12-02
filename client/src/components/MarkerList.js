@@ -7,6 +7,7 @@ import {Button, Container, Stack, Row, Col, CloseButton, Text, Form} from 'react
 function MarkerList(props){
     const [markerItems, setMarkerItems] = useState([])
     const [showForm, setShowForm] = useState(false)
+    const [goToMarkerDest, setGoToMarkerDest] = useState("")
 
     const handleCancelMarker = () => {
         setShowForm(false);
@@ -22,17 +23,28 @@ function MarkerList(props){
         setMarkerItems(markerItems => [...markerItems,
         <li list-style="none" key={title}>
             <Row>
-                <Marker title={title} colour={colour} time={time}></Marker>
+                <Marker title={title} colour={colour} time={time} onMarkerClicked={(key) => handleMarkerClicked(key)}></Marker>
                 <CloseButton onClick={() => handleRemove(title)}></CloseButton>
             </Row>
         </li>])
     }
 
+    const handleMarkerClicked = (key) => {
+      setGoToMarkerDest(key)
+    }
+
     const handleGoToMarker = (key,request) => {
+      console.log(markerItems);
       let foundItem = markerItems.find(item => item.key === key).props.children.props.children[0].props
       let foundItemCopy =  Object.assign({request: request}, foundItem)
       props.onFoundTimeElement(foundItemCopy);
     }
+
+    useEffect(()=> {
+      if(goToMarkerDest)
+      handleGoToMarker(goToMarkerDest, "goToMarker");
+    }, [goToMarkerDest])
+
 
     useEffect(() => {
       if (props.commandInformation.request.includes("loop")) return;
@@ -49,7 +61,7 @@ function MarkerList(props){
         setShowForm(true)
     }
     
-
+    console.log("test")
     return (
       <div style={{height: 70, width: 300, float:'right'}}>
       <Container>

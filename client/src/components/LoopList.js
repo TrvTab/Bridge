@@ -7,6 +7,7 @@ import {Button, Container, Stack, Row, Col, CloseButton, Text, Form} from 'react
 function LoopList(props){
     const [loopItems, setLoopItems] = useState([])
     const [showForm, setShowForm] = useState(false)
+    const [goToLoopDest, setGoToLoopDest] = useState("")
 
    
 
@@ -20,11 +21,17 @@ function LoopList(props){
         setLoopItems(loopItems => [...loopItems,
         <li list-style="none" key={title}>
             <Row>
-                <Loop title={title} colour={colour} startTime={startTime} endTime={endTime}></Loop>
+                <Loop title={title} colour={colour} startTime={startTime} endTime={endTime} onLoopClicked={(key) => handleLoopClicked(key)}></Loop>
                 <CloseButton onClick={() => handleRemove(title)}></CloseButton>
             </Row>
         </li>])
     }
+
+    const handleLoopClicked = (key) => {
+      console.log("LOOP??")
+      setGoToLoopDest(key);
+    }
+
 
     const handleCancelLoop = () => {
       setShowForm(false);
@@ -37,6 +44,14 @@ function LoopList(props){
       let foundItemCopy =  Object.assign({request: request}, foundItem)
       props.onFoundTimeElement(foundItemCopy);
     }
+
+    useEffect(() => {
+      if(goToLoopDest){
+        handleGoToLoop(goToLoopDest, "goToLoop");
+      }
+    }, [goToLoopDest])
+
+
     useEffect(() => {
       if (props.commandInformation.request.includes("marker")){
         return;
