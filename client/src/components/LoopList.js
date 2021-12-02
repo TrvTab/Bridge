@@ -2,14 +2,15 @@ import { useState, useEffect} from 'react'
 import Loop from './Loop'
 import LoopForm from './LoopForm'
 import {Button, Container, Stack, Row, Col, CloseButton, Text, Form} from 'react-bootstrap';
-
 import "./dictaphone.css"
-
+import {convertToMinutes, convertToSeconds, between, validateName } from "../Utils"
+import testUtils from 'react-dom/test-utils';
 
 function LoopList(props){
     const [loopItems, setLoopItems] = useState([])
     const [showForm, setShowForm] = useState(false)
     const [goToLoopDest, setGoToLoopDest] = useState("")
+    const [errorMessage, setErrorMessage] = useState("")
 
 
 
@@ -19,32 +20,22 @@ function LoopList(props){
     }
 
     const submitLoop = (title, colour, startTime, endTime) => {
-        setShowForm(false)
-        setLoopItems(loopItems => [...loopItems,
-        <li list-style="none" key={title}>
-            <Row>
-                <Loop title={title} colour={colour} startTime={startTime} endTime={endTime} onLoopClicked={(key) => handleLoopClicked(key)}></Loop>
-                <CloseButton onClick={() => handleRemove(title)}></CloseButton>
-            </Row>
-        </li>])
+        let returnedErrorMessage = validateName(title, loopItems);
+        setErrorMessage(returnedErrorMessage)
+        if(!returnedErrorMessage){
+          setShowForm(false)
+          setLoopItems(loopItems => [...loopItems,
+          <li list-style="none" key={title}>
+              <Row>
+                  <Loop title={title} colour={colour} startTime={startTime} endTime={endTime} onLoopClicked={(key) => handleLoopClicked(key)}></Loop>
+                  <CloseButton onClick={() => handleRemove(title)}></CloseButton>
+              </Row>
+          </li>])
+        }
+
     }
 
-    const convertToMinutes = (time) => {
-      let minutes = parseInt(time/60)
-      let seconds = (Math.round(60*((time/60) - minutes))).toString()
-      if (seconds.length === 1) {
-        seconds = "0" + seconds
-      }
-      return minutes + ":" + seconds
-    }
 
-    const convertToSeconds = (time) => {
-      let arr = time.split(":")
-      var [minutes, seconds] = arr;
-      var totalSeconds = parseInt(minutes) * 60
-      totalSeconds += parseInt(seconds)
-      return totalSeconds
-    }
 
     const handleLoopClicked = (key) => {
       // console.log("LOOP??")
@@ -57,11 +48,11 @@ function LoopList(props){
 
 
     const handleCancelLoop = () => {
+      setErrorMessage("");
       setShowForm(false);
   }
 
     const handleGoToLoop = (key,request) => {
-      let sampleItem = loopItems.find(item => item.key === key)
       let foundItem = loopItems.find(item => item.key === key).props.children.props.children[0].props
       let startTimeSeconds = convertToSeconds(foundItem.startTime)
       let endTimeSeconds = convertToSeconds(foundItem.endTime)
@@ -78,19 +69,45 @@ function LoopList(props){
       }
     }, [goToLoopDest])
 
+    const validateAddLoop = (commandData) => {
+      if (!between(commandData.firstTimeStamp, 0, commandData.duration)
+        || !between(commandData.secondTimeStamp, 0, commandData.duration)) {
+        setErrorMessage("Loop exceeds video limits")
+        return false
+      }
+      let duplicate = loopItems.find(element => commandData.name === element.key)
+      if (duplicate) {
+        return false
+      }
+      return true
+    }
+
+    const validateLoopPresent = (commandData) => {
+      let found = loopItems.find(element => commandData.name === element.key)
+      if (!found){
+        setErrorMessage(`Loop with name ${commandData.name} does not exist`)
+      }
+      return found
+    }
 
     useEffect(() => {
       if (props.commandInformation.request.includes("marker")){
         return;
       }
       else if (props.commandInformation.request === "addLoop"){
-       submitLoop(props.commandInformation.name, "colour",  convertToMinutes(props.commandInformation.firstTimeStamp),  convertToMinutes(props.commandInformation.secondTimeStamp))
+        if (validateAddLoop(props.commandInformation)) {
+          submitLoop(props.commandInformation.name, "colour",  convertToMinutes(props.commandInformation.firstTimeStamp),  convertToMinutes(props.commandInformation.secondTimeStamp))
+        }
       }
        else if (props.commandInformation.request === "delLoop"){
-        handleRemove(props.commandInformation.name)
+        if (validateLoopPresent(props.commandInformation)){
+          handleRemove(props.commandInformation.name)
+        }
       }
       else if (props.commandInformation.request === "goToLoop") {
-        handleGoToLoop(props.commandInformation.name, props.commandInformation.request)
+        if (validateLoopPresent(props.commandInformation)){
+          handleGoToLoop(props.commandInformation.name, props.commandInformation.request)
+        }
 
       }
       return () => {
@@ -114,7 +131,7 @@ function LoopList(props){
         )}
         {showForm && (
             <div>
-                <LoopForm submitLoop={submitLoop} onCancelLoop={handleCancelLoop}></LoopForm>
+                <LoopForm errorMessage={errorMessage} submitLoop={submitLoop} onCancelLoop={handleCancelLoop}></LoopForm>
             </div>
         )}
 

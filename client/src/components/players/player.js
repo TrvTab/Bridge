@@ -28,7 +28,7 @@ class Player extends Component {
     playing: true,
     controls: false,
     light: false,
-    volume: 0.8,
+    volume: 0.2,
     muted: false,
     played: 0,
     loaded: 0,
@@ -53,21 +53,9 @@ class Player extends Component {
     this.props.onCommandChange(commandData)
   }
 
-  vocalAddMarker(addMarkerData) {
-    if ((addMarkerData.time > this.state.duration) || addMarkerData.time < 0) {
-      this.setState({errorMessage: "Marker time exceeds limits of video"})
-    }
-    this.vocalPassInfoToApp(addMarkerData)
-  }
-
-  vocalAddLoop(addLoopData) {
-    if ((addLoopData.firstTimeStamp > this.state.duration) || (addLoopData.firstTimeStamp < 0)) {
-      this.setState({errorMessage: "Loop start time exceeds limits of video"})
-    }
-    if ((addLoopData.secondTimeStamp > this.state.duration) || (addLoopData.secondTimeStamp < 0)) {
-      this.setState({errorMessage: "Loop end time exceeds limits of video"})
-    }
-    this.vocalPassInfoToApp(addLoopData)
+  vocalAddElement(addMarkerData) {
+    let commandDataDuration =  Object.assign({duration: this.state.duration}, addMarkerData)
+    this.vocalPassInfoToApp(commandDataDuration)
   }
 
   vocalRestart(){
@@ -80,6 +68,14 @@ class Player extends Component {
 
   handlePlayPause = () => {
     this.setState({ playing: !this.state.playing })
+  }
+
+  handleAddMarkerAtCurrentTime = (commandData) => {
+    let commandDataUpdated =  Object.assign({firstTimeStamp: parseInt(this.state.duration * this.state.played), duration: this.state.duration}, commandData)
+    commandDataUpdated.request = "addMarker"
+    console.log(commandDataUpdated)
+    this.vocalPassInfoToApp(commandDataUpdated)
+
   }
 
 
@@ -96,11 +92,11 @@ class Player extends Component {
     else if (childData.request === "exitLoop") this.vocalExitLoop();
     else if (childData.request === "pause") this.handlePlayPause()
     else if (childData.request === "play") this.handlePlayPause()
-    else if (childData.request === "addMarker") this.vocalPassInfoToApp(childData);
-    else if (childData.request === "addLoop") this.vocalPassInfoToApp(childData)
+    else if (childData.request === "addMarkerCurrent") this.handleAddMarkerAtCurrentTime(childData)
+    else if (childData.request === "addMarker") this.vocalAddElement(childData);
+    else if (childData.request === "addLoop") this.vocalAddElement(childData)
     else if (childData.request === 'delMarker') this.vocalPassInfoToApp(childData)
     else if (childData.request === "delLoop") this.vocalPassInfoToApp(childData);
-    else if (childData.request === "restart") this.vocalPassInfoToApp(childData);
     else if (childData.request === "goToMarker") this.vocalPassInfoToApp(childData)
     else if (childData.request === "goToLoop") this.vocalPassInfoToApp(childData)
 
@@ -279,6 +275,11 @@ class Player extends Component {
     if (prevProps.url !== this.props.url){
       console.log(this.props.url);
       this.load(this.props.url);
+    }
+
+    if (prevProps.currentTimeRequest !== this.props.currentTimeRequest) {
+      if (this.props.currentTimeRequest){
+      }
     }
 
   }
