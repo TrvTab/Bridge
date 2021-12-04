@@ -11,3 +11,8 @@ To run the server in development mode, stay in the root directory of project and
 
 To run the client, go into client directory and put in the command `npm start`.
 The client will be running on `http://localhost:3000`.
+
+
+## Deployed Version
+
+The deployed version of the app can be found here[https://trvtab.github.io/bridge-deploy/]
