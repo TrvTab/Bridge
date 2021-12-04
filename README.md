@@ -15,4 +15,4 @@ The client will be running on `http://localhost:3000`.
 
 ## Deployed Version
 
-The deployed version of the app can be found here[https://trvtab.github.io/bridge-deploy/]
+The deployed version of the app can be found here [https://trvtab.github.io/bridge-deploy/]
